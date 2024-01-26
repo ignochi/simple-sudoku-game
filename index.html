@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sudoku</title>
+    <!-- <link rel="icon" type="image/x-icon" href="images/favicon.png"> -->
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <script src="main.js" async></script>
+</head>
+
+<body>
+    <main data-main>
+        <div class="home-page">
+            <div>
+                <header class="game-title">
+                    <h1>Sudoku</h1>
+                    <div>Do you have what it takes...</div>
+                </header>
+
+                <div class="home-page-play-button" data-go-to-menu-page-button>
+                    <button>Play</button>
+                    <div></div>
+                </div>
+
+                <section class="random-facts">
+                    <h2 class="random-facts-header">Random Fact</h2>
+                    <section class="random-facts-main-content" data-random-facts-main-content>
+                        There are over 5 billion valid Sudoku puzzles, and it would take a lifetime to solve them all.
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <div class="menu-page">
+            <div>
+                <ul class="menu">
+                    <li>
+                        <button type="button" class="menu-item" data-menu-item>How to play sudoku</button>
+                        <div class="how-to-play menu-item-dropdown" data-menu-item-dropdown></div>
+                    </li>
+                    <li>
+                        <button type="button" class="menu-item" data-menu-item>About this game</button>
+                        <div class="about-this-game menu-item-dropdown" data-menu-item-dropdown></div>
+                    </li>
+                    <li>
+                        <button type="button" class="menu-item" data-menu-item>Easy</button>
+                        <div class="easy-level menu-item-dropdown" data-menu-item-dropdown></div>
+                    </li>
+                    <li>
+                        <button type="button" class="menu-item" data-menu-item>Medium</button>
+                        <div class="medium-level menu-item-dropdown" data-menu-item-dropdown></div>
+                    </li>
+                    <li>
+                        <button type="button" class="menu-item" data-menu-item>Hard</button>
+                        <div class="hard-level menu-item-dropdown" data-menu-item-dropdown></div>
+                    </li>
+                    <li>
+                        <button type="button" class="menu-item" data-menu-item>Contact the contributors</button>
+                        <div class="contact-the-contributors menu-item-dropdown" data-menu-item-dropdown></div>
+                    </li>
+                    <li>
+                        <button type="button" class="menu-item" data-go-to-home-page-button>Back</button>
+                    </li>
+                </ul>
+                <div class="test"></div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
