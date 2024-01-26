@@ -393,209 +393,37 @@ body {
 }
 
 main {
-    width: 200vw;
-    transition: all 200ms linear;
-    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
 
-    /* //////////////////////// */
-    transform: translateX(-100vw);
+    background-color: red;
+    overflow-x: scroll;
 }
 
-/* first page */
+main > div {
+    width: 200%;
+    height: 80%;
+    background-color: green;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    flex-direction: row;
+}
 
 .home-page {
     width: 100vw;
-
-    height: 100vh;
-    height: 100svh;
-    position: relative;
-    background-color: #b0916e;
-}
-
-.home-page > div {
-    width: 100%;
     height: 100%;
-    max-height: 500px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+
+    background-color: blue;
 }
-
-.game-title {
-    text-align: center;
-    padding-top: 0;
-    margin-bottom: 80px;
-}
-
-.game-title > h1 {
-    margin: 0;
-    font-family: cursive;
-    font-size: 50px;
-    padding: 0;
-}
-
-.game-title > div {
-    font-size: 14px;
-}
-
-.home-page-play-button {
-    width: 125px;
-    height: 35px;
-    border-radius: 12px;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-}
-
-.home-page-play-button > button {
-    width: 100%;
-    height: 100%;
-    border: none;
-    font-size: 20px;
-    letter-spacing: 2px;
-
-    background-color: teal;
-    color: black;
-    cursor: pointer;
-}
-
-.home-page-play-button > div {
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    animation-name: home-page-play-button-animation;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    outline: 5px solid rgba(255, 0, 0, 0.3);
-}
-@keyframes home-page-play-button-animation {
-    from {
-        transform: translate(-50%, -50%) scale(0);
-    }
-    to {
-        transform: translate(-50%, -50%) scale(10);
-    }
-}
-
-.random-facts {
-    width: 80%;
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    padding: 10px 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-
-    background-color: teal;
-    background-color: rgb(112, 94, 70);
-    /* color: rgb(19, 19, 19); */
-}
-
-.random-facts::before {
-    content: " ";
-    background-color: teal;
-    background-color: rgb(112, 94, 70);
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    top: 0;
-    left: -4px;
-    display: inline-block;
-    transform: skewX(40deg);
-}
-
-.random-facts-header {
-    margin: 0;
-    margin-bottom: 10px;
-    font-family: cursive;
-    font-size: 22px;
-}
-
-/* second page */
 
 .menu-page {
     width: 100vw;
-
-    height: 100vh;
-    height: 100svh;
-    position: absolute;
-    top: 0;
-    left: 100vw;
-    background-color: #b0916e;
-}
-
-.menu-page > div {
-    width: 100%;
     height: 100%;
-    max-height: 500px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
 
-    background-color: green;
-}
-
-.menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
-    /* background-color: blue; */
-}
-
-.menu-item {
-    font-size: 25px;
-    font-weight: 600;
-    border: none;
-    font-family: cursive;
-    /* background-color: transparent; */
-    cursor: pointer;
-}
-
-/* .menu-item-dropdown {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    height: 100svh;
-    top: calc(-100svh + -97px);
-    top: -97px;
-    top: -71px;
-    left: 0;
-    transition: all 200ms linear;
-    background-color: red;
-} */
-
-.menu-item-dropdown {
-    position: fixed;
-    width: 100px;
-    height: 100vh;
-    height: 100px;
-    top: 0;
-    left: 0;
-    transition: all 200ms linear;
-    background-color: red;
-}
-
-.display-menu-item-with-js {
-    top: -97px;
-}
-
-/* .menu-item-dropdown {} */
-
-.test {
-    width: 100px;
-    height: 100px;
     background-color: yellow;
-    position: fixed;
-    top: 0;
 }
+
