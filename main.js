@@ -44,17 +44,12 @@ goToHomePage();
 
 function displayMenuItemDropdown() {
     const buttons = document.querySelectorAll("[data-menu-item]");
-    const dropdowns = document.querySelectorAll("[data-menu-item-dropdown]");
-    const CLASS = "display-menu-item-with-js";
+    const content = document.querySelectorAll("[data-menu-item-content]");
+    const CLASS = "display-menu-item-content-with-js";
 
-    buttons.forEach((eachButton) => {
+    buttons.forEach((eachButton, index) => {
         eachButton.addEventListener("click", () => {
-            dropdowns.forEach((eachDropdown) => {
-                eachDropdown.classList.remove(CLASS);
-            });
-
-            const ownDropdown = eachButton.nextElementSibling;
-            ownDropdown.classList.add(CLASS);
+            content.item(index).classList.add(CLASS);
         });
     });
 }

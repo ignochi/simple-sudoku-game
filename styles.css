@@ -403,7 +403,7 @@ main {
 main > div {
     width: 200%;
     height: 80%;
-    /* background-color: green; */
+    background-color: green;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -570,16 +570,17 @@ main > div {
     cursor: pointer;
 }
 
-.menu-item-dropdown {
-    position: absolute;
-    top: -150%;
+.menu-item-content {
+    background-color: red;
+    position: fixed;
+    top: -100%;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: 100svh;
     transition: all 200ms linear;
-    background-color: #b0916e;
 }
 
-.display-menu-item-with-js {
+.display-menu-item-content-with-js {
     top: 0;
 }
