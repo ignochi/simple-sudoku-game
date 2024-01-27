@@ -1,10 +1,11 @@
 "use strict";
 
 function goToMenuPage() {
-    const page = document.querySelector("[data-main]");
+    const page = document.querySelector("[data-home-and-menu-page-container]");
     const button = document.querySelector("[data-go-to-menu-page-button]");
     button.addEventListener("click", () => {
         page.style.translate = "-100vw";
+        // page.style.left = "-100vw";
     });
 }
 goToMenuPage();
@@ -33,7 +34,7 @@ function handleRandomFact() {
 handleRandomFact();
 
 function goToHomePage() {
-    const page = document.querySelector("[data-main]");
+    const page = document.querySelector("[data-home-and-menu-page-container]");
     const button = document.querySelector("[data-go-to-home-page-button]");
     button.addEventListener("click", () => {
         page.style.translate = "0vw";
