@@ -1,12 +1,27 @@
 "use strict";
 
 function goToMenuPage() {
-    const page = document.querySelector("[data-home-and-menu-page-container]");
-    const button = document.querySelector("[data-go-to-menu-page-button]");
-    button.addEventListener("click", () => {
-        page.style.translate = "-100vw";
-        // page.style.left = "-100vw";
-    });
+    function fromHomePage() {
+        const page = document.querySelector("[data-home-and-menu-page-container]");
+        const button = document.querySelector("[data-go-to-menu-page-button]");
+        button.addEventListener("click", () => {
+            page.style.translate = "-100vw";
+        });
+    }
+    fromHomePage();
+
+    function fromMenuItemPage() {
+        const pages = document.querySelectorAll("[data-menu-item-page]");
+        const buttons = document.querySelectorAll("[data-back-to-menu-page-button]");
+        const CLASS = "display-menu-item-page-with-js";
+    
+        buttons.forEach((eachButton, index) => {
+            eachButton.addEventListener("click", () => {
+                pages.item(index).classList.remove(CLASS);
+            });
+        });
+    }
+    fromMenuItemPage();
 }
 goToMenuPage();
 
@@ -42,15 +57,15 @@ function goToHomePage() {
 }
 goToHomePage();
 
-function displayMenuItemDropdown() {
+function displayMenuItemPage() {
     const buttons = document.querySelectorAll("[data-menu-item]");
-    const content = document.querySelectorAll("[data-menu-item-content]");
-    const CLASS = "display-menu-item-content-with-js";
+    const pages = document.querySelectorAll("[data-menu-item-page]");
+    const CLASS = "display-menu-item-page-with-js";
 
     buttons.forEach((eachButton, index) => {
         eachButton.addEventListener("click", () => {
-            content.item(index).classList.add(CLASS);
+            pages.item(index).classList.add(CLASS);
         });
     });
 }
-displayMenuItemDropdown();
+displayMenuItemPage();
