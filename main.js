@@ -14,7 +14,7 @@ function goToMenuPage() {
         const pages = document.querySelectorAll("[data-menu-item-page]");
         const buttons = document.querySelectorAll("[data-back-to-menu-page-button]");
         const CLASS = "display-menu-item-page-with-js";
-    
+
         buttons.forEach((eachButton, index) => {
             eachButton.addEventListener("click", () => {
                 pages.item(index).classList.remove(CLASS);
@@ -69,3 +69,22 @@ function displayMenuItemPage() {
     });
 }
 displayMenuItemPage();
+
+function handlePuzzleAspectRatio() {
+    // I created this function as a replacement for the css aspect-ratio
+    // proerty, because it doesn't have very good browser support.
+
+    function resize() {
+        const puzzle = document.querySelectorAll("[data-puzzle]");
+
+        puzzle.forEach((eachPuzzle) => {
+            eachPuzzle.style.height = `${eachPuzzle.offsetWidth}px`;
+
+
+            console.log(eachPuzzle.style.width, eachPuzzle.style.height);
+        });
+    }
+    resize();
+    window.addEventListener("resize", resize);
+}
+handlePuzzleAspectRatio();

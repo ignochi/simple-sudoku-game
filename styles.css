@@ -580,7 +580,7 @@ main > div {
 }
 
 .menu-item-page {
-    background-color: red;
+    background-color: #b0916e;
     position: fixed;
     top: -100%;
     left: 0;
@@ -589,6 +589,7 @@ main > div {
     height: 100svh;
     transition: all 200ms linear;
     padding: 5px;
+    overflow-y: auto;
 }
 
 .display-menu-item-page-with-js {
@@ -599,6 +600,8 @@ main > div {
     width: 100px;
     border-radius: 8px;
     transform: skewX(10deg);
+
+    margin-bottom: 20px;
 }
 
 .back-to-main-menu-button > button {
@@ -617,4 +620,79 @@ main > div {
     width: 10px;
     height: 10px;
     outline: 5px solid rgba(255, 0, 0, 0.3);
+}
+
+/* the puzzle */
+
+.puzzle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    background-color: green;
+}
+
+.puzzle {
+    width: 100%;
+    max-width: 350px;
+
+    background-color: blue;
+}
+
+.game-controls {
+    width: 100%;
+    max-width: 350px;
+
+    background-color: red;
+
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    column-gap: 5px;
+    row-gap: 10px;
+}
+
+.game-controls > button {
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.game-controls > button:not(:last-child) {
+    font-size: 22px;
+}
+
+.restart-game-button {
+    padding: 7px 0;
+    grid-column: 1 / span 9;
+}
+
+@media (min-width: 768px) {
+    .puzzle-container {
+        position: relative;
+        top: 40%;
+        transform: translateY(-40%);
+        flex-direction: row;
+        justify-content: center;
+        gap: 50px;
+        align-items: flex-end;
+    }
+
+    .game-controls {
+        width: auto;
+        height: 280px;
+        grid-template-columns: 75px 75px 75px;
+        grid-template-rows: auto auto auto 55px;
+        gap: 5px;
+    }
+    
+    .game-controls > button:not(:last-child) {
+        font-size: 30px;
+    }
+    
+    .restart-game-button {
+        grid-column: 1 / span 3;
+        margin-top: 5px;
+    }
 }
