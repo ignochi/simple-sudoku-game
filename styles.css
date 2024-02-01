@@ -8,7 +8,7 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
-html {
+ html {
     line-height: 1.15;
     /* 1 */
     -webkit-text-size-adjust: 100%;
@@ -446,15 +446,9 @@ main > div {
 .wave-animated-button {
     overflow: hidden;
     position: relative;
-    cursor: pointer;
 }
 
-.wave-animated-button > button {
-    width: 100%;
-    height: 100%;
-}
-
-.wave-animated-button > div {
+.wave-animated-button > span {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -469,10 +463,11 @@ main > div {
     width: 125px;
     height: 35px;
     border-radius: 12px;
-    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.home-page-play-button > button {
+.home-page-play-button {
     border: none;
     font-size: 20px;
     letter-spacing: 2px;
@@ -482,7 +477,7 @@ main > div {
     user-select: none;
 }
 
-.home-page-play-button > div {
+.home-page-play-button > span {
     width: 10px;
     height: 10px;
     outline: 5px solid rgba(255, 0, 0, 0.3);
@@ -604,7 +599,7 @@ main > div {
     margin-bottom: 20px;
 }
 
-.back-to-main-menu-button > button {
+.back-to-main-menu-button {
     border: none;
     font-size: 14px;
     padding: 5px 0;
@@ -616,7 +611,7 @@ main > div {
     user-select: none;
 }
 
-.back-to-main-menu-button > div {
+.back-to-main-menu-button > span {
     width: 10px;
     height: 10px;
     outline: 5px solid rgba(255, 0, 0, 0.3);
@@ -636,11 +631,45 @@ main > div {
 .puzzle {
     width: 100%;
     max-width: 350px;
+    display: grid;
 
     background-color: blue;
+    border: 2px solid black;
 }
 
-.game-controls {
+.puzzle > div {
+    border: 1px solid black;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.default-value {
+    background-color: white;
+}
+
+.easy-level-puzzle {
+    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.medium-level-puzzle {
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.hard-level-puzzle {
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+/* .block1 {
+    background-color: red;
+} */
+
+.puzzle-keyboard {
     width: 100%;
     max-width: 350px;
 
@@ -652,18 +681,18 @@ main > div {
     row-gap: 10px;
 }
 
-.game-controls > button {
+.puzzle-keyboard > button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
     user-select: none;
 }
 
-.game-controls > button:not(:last-child) {
+.puzzle-keyboard > button:not(:last-child) {
     font-size: 22px;
 }
 
-.restart-game-button {
+.restart-puzzle-button {
     padding: 7px 0;
     grid-column: 1 / span 9;
 }
@@ -679,7 +708,7 @@ main > div {
         align-items: flex-end;
     }
 
-    .game-controls {
+    .puzzle-keyboard {
         width: auto;
         height: 280px;
         grid-template-columns: 75px 75px 75px;
@@ -687,11 +716,11 @@ main > div {
         gap: 5px;
     }
     
-    .game-controls > button:not(:last-child) {
+    .puzzle-keyboard > button:not(:last-child) {
         font-size: 30px;
     }
     
-    .restart-game-button {
+    .restart-puzzle-button {
         grid-column: 1 / span 3;
         margin-top: 5px;
     }
