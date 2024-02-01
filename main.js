@@ -310,7 +310,7 @@ function handleEasyLevelPuzzle() {
                 eachCell.setAttribute("data-block", 3);
             } else if (row > 2 && column > 2) {
                 eachCell.style.backgroundColor = "cyan";
-                console.log(eachCell);
+                // console.log(eachCell);
                 eachCell.setAttribute("data-block", 4);
             }
         });
@@ -318,6 +318,29 @@ function handleEasyLevelPuzzle() {
 
     setupCells(puzzle, 16);
     assignBlock();
+
+    function setDefaultValues() {
+        let cells = puzzle.querySelectorAll("div");
+        let arrayFromCells = [...cells];
+        const arrOfDefaultValues = [2, 1, 2, 3, 1];
+
+        cells.item(0).innerHTML = arrOfDefaultValues[0];
+        cells.item(5).innerHTML = arrOfDefaultValues[1];
+        cells.item(10).innerHTML = arrOfDefaultValues[2];
+        cells.item(12).innerHTML = arrOfDefaultValues[3];
+        cells.item(15).innerHTML = arrOfDefaultValues[4];
+
+        let filteredCells = arrayFromCells.filter(function (element) {
+            // return element.hasAttribute('data-row');
+            return element.innerHTML != "";
+        });
+
+        filteredCells.forEach((eachCell)=> {
+            eachCell.setAttribute("data-default-value", "");
+        });
+        // console.log(filteredCells);
+    }
+    setDefaultValues();
 }
 handleEasyLevelPuzzle();
 
@@ -329,7 +352,7 @@ function handleMediumLevelPuzzle() {
         cells.forEach((eachCell) => {
             const row = eachCell.getAttribute('data-row');
             const column = eachCell.getAttribute('data-column');
-    
+
             if (row <= 2 && column <= 3) {
                 eachCell.style.backgroundColor = "red";
                 // console.log(eachCell);
@@ -360,6 +383,35 @@ function handleMediumLevelPuzzle() {
 
     setupCells(puzzle, 36);
     assignBlock();
+
+    function setDefaultValues() {
+        let cells = puzzle.querySelectorAll("div");
+        let arrayFromCells = [...cells];
+        const arrOfDefaultValues = [1, 6, 2, 5, 6, 4, 2, 3, 2, 6, 3];
+
+        cells.item(4).innerHTML = arrOfDefaultValues[0];
+        cells.item(5).innerHTML = arrOfDefaultValues[1];
+        cells.item(6).innerHTML = arrOfDefaultValues[2];
+        cells.item(13).innerHTML = arrOfDefaultValues[3];
+        cells.item(19).innerHTML = arrOfDefaultValues[4];
+        cells.item(20).innerHTML = arrOfDefaultValues[5];
+        cells.item(22).innerHTML = arrOfDefaultValues[6];
+        cells.item(23).innerHTML = arrOfDefaultValues[7];
+        cells.item(25).innerHTML = arrOfDefaultValues[8];
+        cells.item(27).innerHTML = arrOfDefaultValues[9];
+        cells.item(32).innerHTML = arrOfDefaultValues[10];
+
+        let filteredCells = arrayFromCells.filter(function (element) {
+            // return element.hasAttribute('data-row');
+            return element.innerHTML != "";
+        });
+
+        filteredCells.forEach((eachCell)=> {
+            eachCell.setAttribute("data-default-value", "");
+        });
+        // console.log(filteredCells);
+    }
+    setDefaultValues();
 }
 handleMediumLevelPuzzle();
 
@@ -371,7 +423,7 @@ function handleHardLevelPuzzle() {
         cells.forEach((eachCell) => {
             const row = eachCell.getAttribute('data-row');
             const column = eachCell.getAttribute('data-column');
-    
+
             if (row <= 3 && column <= 3) {
                 eachCell.style.backgroundColor = "red";
                 // console.log(eachCell);
@@ -406,7 +458,7 @@ function handleHardLevelPuzzle() {
                 eachCell.setAttribute("data-block", 8);
             } else if ((row > 6) && column > 6) {
                 eachCell.style.backgroundColor = "yellowgreen";
-                console.log(eachCell);
+                // console.log(eachCell);
                 eachCell.setAttribute("data-block", 9);
             }
         });
@@ -414,6 +466,50 @@ function handleHardLevelPuzzle() {
 
     setupCells(puzzle, 81);
     assignBlock();
+
+    function setDefaultValues() {
+        let cells = puzzle.querySelectorAll("div");
+        let arrayFromCells = [...cells];
+        const arrOfDefaultValues = [9, 8, 4, 1, 9, 6, 3, 5, 4, 2, 8, 5, 3, 4, 7, 2, 8, 3, 1, 6, 9, 5, 8, 7, 1, 3];
+
+        cells.item(1).innerHTML = arrOfDefaultValues[0];
+        cells.item(6).innerHTML = arrOfDefaultValues[1];
+        cells.item(8).innerHTML = arrOfDefaultValues[2];
+        cells.item(10).innerHTML = arrOfDefaultValues[3];
+        cells.item(13).innerHTML = arrOfDefaultValues[4];
+        cells.item(18).innerHTML = arrOfDefaultValues[5];
+        cells.item(20).innerHTML = arrOfDefaultValues[6];
+        cells.item(29).innerHTML = arrOfDefaultValues[7];
+        cells.item(34).innerHTML = arrOfDefaultValues[8];
+        cells.item(36).innerHTML = arrOfDefaultValues[9];
+        cells.item(40).innerHTML = arrOfDefaultValues[10];
+        cells.item(42).innerHTML = arrOfDefaultValues[11];
+        cells.item(44).innerHTML = arrOfDefaultValues[12];
+        cells.item(45).innerHTML = arrOfDefaultValues[13];
+        cells.item(47).innerHTML = arrOfDefaultValues[14];
+        cells.item(51).innerHTML = arrOfDefaultValues[15];
+        cells.item(57).innerHTML = arrOfDefaultValues[16];
+        cells.item(59).innerHTML = arrOfDefaultValues[17];
+        cells.item(61).innerHTML = arrOfDefaultValues[18];
+        cells.item(66).innerHTML = arrOfDefaultValues[19];
+        cells.item(69).innerHTML = arrOfDefaultValues[20];
+        cells.item(70).innerHTML = arrOfDefaultValues[21];
+        cells.item(72).innerHTML = arrOfDefaultValues[22];
+        cells.item(73).innerHTML = arrOfDefaultValues[23];
+        cells.item(77).innerHTML = arrOfDefaultValues[24];
+        cells.item(78).innerHTML = arrOfDefaultValues[25];
+
+        let filteredCells = arrayFromCells.filter(function (element) {
+            // return element.hasAttribute('data-row');
+            return element.innerHTML != "";
+        });
+
+        filteredCells.forEach((eachCell)=> {
+            eachCell.setAttribute("data-default-value", "");
+        });
+        // console.log(filteredCells);
+    }
+    setDefaultValues();
 }
 handleHardLevelPuzzle();
 
@@ -447,7 +543,6 @@ function handlePuzzleInput() {
                     eachCell.innerHTML === previouslyFocusedElement.innerHTML &&
                     eachCell !== previouslyFocusedElement
                 ) {
-                    console.log(eachCell === previouslyFocusedElement);
                     alert("occurs multiple times across it's row");
                 }
             });
@@ -472,21 +567,37 @@ function handlePuzzleInput() {
                     eachCell.innerHTML === previouslyFocusedElement.innerHTML &&
                     eachCell !== previouslyFocusedElement
                 ) {
-                    console.log(eachCell === previouslyFocusedElement);
                     alert("occurs multiple times along it's column");
                 }
             });
         }
 
-        // function checkthroughTheBlock() {
-        // 2. get all the children of parent that have the same value for the data-block attribute 
-        // as the previouslyFocusedElement
-        // 3. loop through them, if the value of the previously focused element occurs twice,
-        // mark the previouslyFocusedElement as wrong
-        // }
+        function checkthroughTheBlock() {
+            // 2. get all the children of parent that have the same value for the data-block attribute 
+            // as the previouslyFocusedElement
+
+            const cellsBlock = previouslyFocusedElement.dataset.block;
+            let arrayFromCells = [...cells];
+            let filteredCells = arrayFromCells.filter(function (element) {
+                // return element.hasAttribute('data-row');
+                return element.getAttribute('data-block') === cellsBlock;
+            });
+            // console.log(filteredCells[0].innerHTML);
+
+            // 3. loop through them, if the value of the previously focused element occurs twice,
+            // mark the previouslyFocusedElement as wrong
+            filteredCells.forEach((eachCell) => {
+                if (
+                    eachCell.innerHTML === previouslyFocusedElement.innerHTML &&
+                    eachCell !== previouslyFocusedElement
+                ) {
+                    alert("occurs multiple times along it's block");
+                }
+            });
+        }
         checkAcrossTheRow();
         checkAlongTheColumn();
-        // checkthroughTheBlock();
+        checkthroughTheBlock();
     }
 
     function checkIfInputIsOutOfRange(largestPossibleInput, input) {
