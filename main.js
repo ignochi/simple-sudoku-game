@@ -161,8 +161,120 @@ function setupCells(puzzle, totalNoOfCells) {
     setTabindex();
 }
 
+function checkIfPuzzleIsComplete(nodeList) {
+    for (let i = 0; i < nodeList.length; i++) {
+        const cell = nodeList[i];
+        const cellContent = cell.innerHTML;
+
+        if (cellContent === "" || (cell.classList.contains("cell-is-in-wrong-row") || cell.classList.contains("cell-is-in-wrong-column") || cell.classList.contains("cell-is-in-wrong-block"))) {
+            // Found an empty div
+            console.log(cell);
+            return false;
+        }
+    }
+
+    // All divs are not empty
+    return true;
+}
+
+function handleInputsUniqueness(cellOfInput) {
+    const cellOfInputsRow = cellOfInput.dataset.row;
+    const cellOfInputsColumn = cellOfInput.dataset.column;
+    const cellOfInputBlock = cellOfInput.dataset.block;
+    const cells = cellOfInput.parentNode.children;
+    // let arrayFromCells = [...cells];
+    const arrayOfCells = Array.from(cells);
+    // let filteredCells = arrayFromCells.filter(function (element) {
+    //     return (
+    //         (element.getAttribute('data-row') === cellsRow && element !== previouslyFocusedElement) ||
+    //         (element.getAttribute('data-column') === cellsColumn && element !== previouslyFocusedElement) ||
+    //         (element.getAttribute('data-block') === cellsBlock && element !== previouslyFocusedElement)
+    //     )
+    // });
+    const cellsInFocusedElementsRow = arrayOfCells.filter(function (element) {
+        return element.getAttribute('data-row') === cellOfInputsRow;
+    });
+    const cellsInFocusedElementsColumn = arrayOfCells.filter(function (element) {
+        return element.getAttribute('data-column') === cellOfInputsColumn;
+    });
+    const cellsInFocusedElementsBlock = arrayOfCells.filter(function (element) {
+        return element.getAttribute('data-block') === cellOfInputBlock;
+    });
+    const textContentOfCellsInFocusedElementsRow = cellsInFocusedElementsRow.map(cell => cell.innerHTML);
+    const textContentOfCellsInFocusedElementsColumn = cellsInFocusedElementsColumn.map(cell => cell.innerHTML);
+    const textContentOfCellsInFocusedElementsBlock = cellsInFocusedElementsBlock.map(cell => cell.innerHTML);
+
+    function getDuplicateNumbers(arr) {
+        const testedValues = [];
+        const duplicates = [];
+
+        for (let num of arr) {
+            if (testedValues.includes(num) && !(duplicates.includes(num))) {
+                if (num !== "") {
+                    duplicates.push(num);
+                }
+            }
+            testedValues.push(num);
+
+        }
+        return duplicates;
+    }
+
+    function markWrongInputs(nodeList, arr, CLASS) {
+        nodeList.forEach((node) => {
+            if (arr.includes(node.innerHTML)) {
+                node.classList.add(CLASS);
+            }
+            else {
+                node.classList.remove(CLASS);
+            }
+        });
+    }
+    // const wrongRowAttr = (true)? "f":"g";
+    markWrongInputs(cellsInFocusedElementsRow, getDuplicateNumbers(textContentOfCellsInFocusedElementsRow), "cell-is-in-wrong-row");
+    markWrongInputs(cellsInFocusedElementsColumn, getDuplicateNumbers(textContentOfCellsInFocusedElementsColumn), "cell-is-in-wrong-column");
+    markWrongInputs(cellsInFocusedElementsBlock, getDuplicateNumbers(textContentOfCellsInFocusedElementsBlock), "cell-is-in-wrong-block");
+
+    const isNotEmpty = checkIfPuzzleIsComplete(cells);
+
+    if (isNotEmpty) {
+        console.log('There are no empty divs.');
+    } else {
+        console.log('There is at least one empty div.');
+    }
+}
+
+function handleOutOfRangeInputs(largestPossibleInput, input, selectedCell) {
+    if (input > 0 && input <= largestPossibleInput) {
+        selectedCell.innerHTML = input;
+        handleInputsUniqueness(selectedCell);
+    } else {
+        alert("Input is out of range");
+    }
+}
+
+function getInput(numberButtons, puzzle) {
+    let selectedCell;
+
+    puzzle.addEventListener("blur", function (event) {
+        selectedCell = event.target;
+    }, true);
+
+    numberButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (!(selectedCell.hasAttribute("data-default-value"))) {
+                const cells = selectedCell.parentNode.children;
+                const numberOfCells = cells.length;
+                const largestPossibleInput = Math.sqrt(numberOfCells);
+                handleOutOfRangeInputs(largestPossibleInput, button.innerHTML, selectedCell);
+            }
+        });
+    })
+}
+
 function handleEasyLevelPuzzle() {
     const puzzle = document.querySelector("[data-easy-level-puzzle]");
+    const numberButtons = document.querySelectorAll("[data-easy-level-puzzle-container] [data-number-button]");
 
     function assignBlock() {
         const cells = document.querySelectorAll("[data-easy-level-puzzle] > div");
@@ -219,11 +331,13 @@ function handleEasyLevelPuzzle() {
     assignBlock();
     setDefaultValues();
     PutBorderBetweenBlocks();
+    getInput(numberButtons, puzzle);
 }
 handleEasyLevelPuzzle();
 
 function handleMediumLevelPuzzle() {
     const puzzle = document.querySelector("[data-medium-level-puzzle]");
+    const numberButtons = document.querySelectorAll("[data-medium-level-puzzle-container] [data-number-button]");
 
     function assignBlock() {
         const cells = document.querySelectorAll("[data-medium-level-puzzle] > div");
@@ -300,11 +414,13 @@ function handleMediumLevelPuzzle() {
     assignBlock();
     setDefaultValues();
     PutBorderBetweenBlocks();
+    getInput(numberButtons, puzzle);
 }
 handleMediumLevelPuzzle();
 
 function handleHardLevelPuzzle() {
     const puzzle = document.querySelector("[data-hard-level-puzzle]");
+    const numberButtons = document.querySelectorAll("[data-hard-level-puzzle-container] [data-number-button]");
 
     function assignBlock() {
         const cells = document.querySelectorAll("[data-hard-level-puzzle] > div");
@@ -417,27 +533,160 @@ function handleHardLevelPuzzle() {
         cells[77].classList.add("border-right");
     }
 
+    // function getDuplicateNumbers(arr) {
+    //     const testedValues = [];
+    //     const duplicates = [];
+
+    //     for (let num of arr) {
+    //         if (testedValues.includes(num) && !(duplicates.includes(num))) {
+    //             if (num !== "") {
+    //                 duplicates.push(num);
+    //             }
+    //         }
+    //         testedValues.push(num);
+
+    //     }
+    //     // console.log("testedValues = " + testedValues);
+    //     // console.log("duplicates = " + duplicates);
+    //     console.log("duplicates")
+    //     return duplicates;
+    // }
+
+    // function markWrongInputs(nodeList, arr) {
+    //     nodeList.forEach((node) => {
+    //         if (arr.includes(node.innerHTML)) {
+    //             node.style.backgroundColor = "orange";
+    //         } else {
+    //             node.style.backgroundColor = "transparent";
+    //         }
+    //     });
+    //     // console.log(nodeList, arr);
+    // }
+
+    // function checkIfInputIsUnique() {
+    //     const arrayOfCells = Array.from(cells);
+
+    //     function checkAcrossRows() {
+    //         const row1 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "1";
+    //         });
+    //         const row2 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "2";
+    //         });
+    //         const row3 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "3";
+    //         });
+    //         const row4 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "4";
+    //         });
+    //         const row5 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "5";
+    //         });
+    //         const row6 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "6";
+    //         });
+    //         const row7 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "7";
+    //         });
+    //         const row8 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "8";
+    //         });
+    //         const row9 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-row') === "9";
+    //         });
+    //         const rowsArray = [row1, row2, row3, row4, row5, row6, row7, row8, row9];
+
+    //         for (const rows of rowsArray) {
+    //             const arrayOfCells = Array.from(rows);
+    //             const textContentOfCells = arrayOfCells.map(cell => cell.innerHTML);
+    //             // console.log(getDuplicateNumbers(textContentOfCells));
+    //             markWrongInputs(arrayOfCells, getDuplicateNumbers(textContentOfCells));
+    //         }
+    //     }
+
+    //     function checkAcrossColumns() {
+    //         const column1 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "1";
+    //         });
+    //         const column2 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "2";
+    //         });
+    //         const column3 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "3";
+    //         });
+    //         const column4 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "4";
+    //         });
+    //         const column5 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "5";
+    //         });
+    //         const column6 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "6";
+    //         });
+    //         const column7 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "7";
+    //         });
+    //         const column8 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "8";
+    //         });
+    //         const column9 = arrayOfCells.filter(function (element) {
+    //             return element.getAttribute('data-column') === "9";
+    //         });
+    //         const columnsArray = [column1, column2, column3, column4, column5, column6, column7, column8, column9];
+
+    //         for (const columns of columnsArray) {
+    //             const arrayOfCells = Array.from(columns);
+    //             const textContentOfCells = arrayOfCells.map(cell => cell.innerHTML);
+    //             console.log(arrayOfCells);
+    //             markWrongInputs(arrayOfCells, getDuplicateNumbers(textContentOfCells));
+    //         }
+    //         console.log("my name is...")
+    //     }
+
+    //     checkAcrossRows();
+    //     checkAcrossColumns();
+    // }
+
+    // function getInput() {
+    //     const numberButtons = document.querySelectorAll("[data-hard-level-puzzle-container] [data-number-button]");
+
+    //     puzzle.addEventListener("blur", function (event) {
+    //         selectedCell = event.target;
+    //     }, true);
+
+    //     numberButtons.forEach((button) => {
+    //         button.addEventListener("click", () => {
+    //             cells = selectedCell.parentNode.children;
+    //             const numberOfCells = cells.length;
+    //             const largestPossibleInput = Math.sqrt(numberOfCells);
+    //             // console.log(cells, numberOfCells, largestPossibleInput);
+    //             checkIfInputIsOutOfRange(largestPossibleInput, button.innerHTML);
+    //         });
+    //     })
+    // }
+
     setupCells(puzzle, 81);
     assignBlock();
     setDefaultValues();
     PutBorderBetweenBlocks();
+    getInput(numberButtons, puzzle);
 }
 handleHardLevelPuzzle();
 
-function checkIfPuzzleIsComplete(nodeList) {
-    for (let i = 0; i < nodeList.length; i++) {
-        const cell = nodeList[i];
-        const cellContent = cell.innerHTML;
+// function checkIfPuzzleIsComplete(nodeList) {
+//     for (let i = 0; i < nodeList.length; i++) {
+//         const cell = nodeList[i];
+//         const cellContent = cell.innerHTML;
 
-        if (cellContent === "") {
-            // Found an empty div
-            return false;
-        }
-    }
+//         if (cellContent === "") {
+//             // Found an empty div
+//             return false;
+//         }
+//     }
 
-    // All divs are not empty
-    return true;
-}
+//     // All divs are not empty
+//     return true;
+// }
 
 function handlePuzzleInput() {
     // handleNumberButtonsKeyPress
@@ -453,123 +702,103 @@ function handlePuzzleInput() {
         const cellsColumn = previouslyFocusedElement.dataset.column;
         const cellsBlock = previouslyFocusedElement.dataset.block;
         // let arrayFromCells = [...cells];
-        let arrayFromCells = Array.from(cells);
-        let filteredCells = arrayFromCells.filter(function (element) {
-            return (
-                (element.getAttribute('data-row') === cellsRow && element !== previouslyFocusedElement) ||
-                (element.getAttribute('data-column') === cellsColumn && element !== previouslyFocusedElement) ||
-                (element.getAttribute('data-block') === cellsBlock && element !== previouslyFocusedElement)
-            )
+        const arrayOfCells = Array.from(cells);
+        // let filteredCells = arrayFromCells.filter(function (element) {
+        //     return (
+        //         (element.getAttribute('data-row') === cellsRow && element !== previouslyFocusedElement) ||
+        //         (element.getAttribute('data-column') === cellsColumn && element !== previouslyFocusedElement) ||
+        //         (element.getAttribute('data-block') === cellsBlock && element !== previouslyFocusedElement)
+        //     )
+        // });
+        const cellsInFocusedElementsRow = arrayOfCells.filter(function (element) {
+            return element.getAttribute('data-row') === cellsRow;
         });
-        // let cell;
-        // function checkIfNumberExists(nodeList) {
-        //     for (let i = 0; i < nodeList.length; i++) {
-        //         cell = nodeList[i];
-        //         const cellContent = cell.innerHTML;
-    
-        //         if (cellContent === previouslyFocusedElement.innerHTML) {
-        //             return false;
-        //         }
-        //     }
-    
-        //     return true;
-        // }
-        // const exists = checkIfNumberExists(filteredCells);
-        console.log();
-        // 1. loop through filtered cells
-        // 2. get all the elements in the same row as the previously focused element
-        const previouslyFocusedElementsRow = arrayFromCells.filter(function (element) {
-            return (
-                element.getAttribute('data-row') === cellsRow && element !== previouslyFocusedElement
-            )
+        const cellsInFocusedElementsColumn = arrayOfCells.filter(function (element) {
+            return element.getAttribute('data-column') === cellsColumn;
         });
-        // console.log(previouslyFocusedElementsRow);
-        // 3. get all the elements in the same column as the previously focused element
-        const previouslyFocusedElementsColumn = arrayFromCells.filter(function (element) {
-            return (
-                element.getAttribute('data-column') === cellsColumn && element !== previouslyFocusedElement
-            )
-        });
-        // console.log(previouslyFocusedElementsColumn);
-        // 4. get all the elements in the same block as the previously focused element
-        const previouslyFocusedElementsBlock = arrayFromCells.filter(function (element) {
-            return (
-                element.getAttribute('data-block') === cellsBlock && element !== previouslyFocusedElement
-            )
-        });
-        // console.log(previouslyFocusedElementsBlock);
-        // 5. loop through 2., if any element has the same input as the previously focused element,
-        // mark it as wrong else mark it as right
-            // if (
-            //     previouslyFocusedElementsRow.every((cell) => {
-            //         return cell.innerHTML !== previouslyFocusedElement.innerHTML;
-            //     })
-            // ) {
-            //     previouslyFocusedElementsRow.forEach((cell) => {
-            //         cell.classList.remove("other-occurrence-of-wrong-input");
-            //     });
-            //     previouslyFocusedElement.classList.remove("wrong-input");
-            // }
 
-            previouslyFocusedElementsRow.forEach((cell) => {
-                if (cell.innerHTML === previouslyFocusedElement.innerHTML) {
-                    // console.log("occurrence on its row");
-                    cell.classList.add("other-occurrence-of-wrong-input");
-                    previouslyFocusedElement.classList.add("wrong-input");
+        const textContentOfCellsInFocusedElementsRow = cellsInFocusedElementsRow.map(cell => cell.innerHTML);
+        const textContentOfCellsInFocusedElementsColumn = cellsInFocusedElementsColumn.map(cell => cell.innerHTML);
+
+        function getDuplicateNumbers(arr) {
+            const testedValues = [];
+            const duplicates = [];
+
+            for (let num of arr) {
+                if (testedValues.includes(num) && !(duplicates.includes(num))) {
+                    if (num !== "") {
+                        duplicates.push(num);
+                    }
                 }
-            });
+                testedValues.push(num);
 
-        // 6. loop through 3., if any element has the same input as the previously focused element,
-        // mark it as wrong else mark it as right
-        previouslyFocusedElementsColumn.forEach((cell) => {
-            if (cell.innerHTML === previouslyFocusedElement.innerHTML) {
-                console.log("occurrence on its column");
-                cell.classList.add("other-occurrence-of-wrong-input");
-                previouslyFocusedElement.classList.add("wrong-input");
             }
-        });
-        // 7. loop through 4., if any element has the same input as the previously focused element,
-        // mark it as wrong else mark it as right
-        previouslyFocusedElementsBlock.forEach((cell) => {
-            if (cell.innerHTML === previouslyFocusedElement.innerHTML) {
-                console.log("occurrence on its block");
-                cell.classList.add("other-occurrence-of-wrong-input");
-                previouslyFocusedElement.classList.add("wrong-input");
+            // console.log("testedValues = " + testedValues);
+            // console.log("duplicates = " + duplicates);
+            return duplicates;
+        }
+
+        function markWrongInputs(row, rowDuplicates, column, columnDuplicates) {
+            // nodeList.forEach((node) => {
+            // if (arr.includes(node.innerHTML)) {
+            //     node.style.backgroundColor = "orange";
+            // } else {
+            //     node.style.backgroundColor = "transparent";
+            // }
+            // });
+            for (let i = 0; i < row.length; i++) {
+                // if (rowDuplicates.includes(row[i].innerHTML)) {
+                //     row[i].style.backgroundColor = "orange";
+                // } else {
+                //     row[i].style.backgroundColor = "green";
+                // }
+
+                if (columnDuplicates.includes(column[i].innerHTML) && rowDuplicates.includes(column[i].innerHTML)) {
+                    column[i].style.backgroundColor = "orange";
+                    if (rowDuplicates.includes(row[i].innerHTML)) {
+                        row[i].style.backgroundColor = "orange";
+                    }
+                } else if (columnDuplicates.includes(column[i].innerHTML) && !(rowDuplicates.includes(column[i].innerHTML))) {
+                    column[i].style.backgroundColor = "orange";
+                } else if (!(columnDuplicates.includes(row[i].innerHTML)) && rowDuplicates.includes(row[i].innerHTML)) {
+                    row[i].style.backgroundColor = "orange";
+                    // console.log("yes")
+                } else {
+                    column[i].style.backgroundColor = "transparent";
+                    row[i].style.backgroundColor = "transparent";
+                }
+
+
+                // if (columnDuplicates.includes(column[i].innerHTML)) {
+                //     column[i].style.backgroundColor = "orange";
+                // } else {
+                //     column[i].style.backgroundColor = "green";
+                // }
+
+                // if (
+                //     columnDuplicates.includes(column[i].innerHTML) &&
+                //     !(rowDuplicates.includes(column[i].innerHTML))
+                // ) {
+                //     column[i].style.backgroundColor = "orange";
+                // }
+
+                // if (
+                //     columnDuplicates.includes(column[i].innerHTML) &&
+                //     (rowDuplicates.includes(column[i].innerHTML))
+                // ) {
+                //     column[i].style.backgroundColor = "orange";
+                //     row[i].style.backgroundColor = "orange";
+                // }
             }
-        });
+        }
+        markWrongInputs(
+            cellsInFocusedElementsRow, getDuplicateNumbers(textContentOfCellsInFocusedElementsRow),
+            cellsInFocusedElementsColumn, getDuplicateNumbers(textContentOfCellsInFocusedElementsColumn)
+        );
+        // markWrongInputs(cellsInFocusedElementsRow, getDuplicateNumbers(textContentOfCellsInFocusedElementsRow));
+        // markWrongInputs(cellsInFocusedElementsColumn, getDuplicateNumbers(textContentOfCellsInFocusedElementsColumn));
+        // console.log(getDuplicateNumbers(textContentOfCellsInFocusedElementsRow));
 
-        // if (exists) {
-        //     console.log('occurrence does not exist');
-        // } else {
-        //     console.log('occurrence exists');
-        // }
-
-        // filteredCells.forEach((eachCell) => {
-        //     // if previouslyFocusedElement should be there, remove the wrong classes
-        //     if (eachCell.innerHTML === previouslyFocusedElement.innerHTML) {
-        //         console.log("match found");
-        //     }
-        // });
-
-        // filteredCells.forEach(function (eachCell) {
-        //     if (previouslyFocusedElement.style.color === "red") {
-        //         previouslyFocusedElement.style.color = "blue";
-        //         console.log(eachCell)
-        //         // eachCell.style.backgroundColor = "transparent";
-        //     }
-
-        //     if (
-        //         eachCell.innerHTML === previouslyFocusedElement.innerHTML &&
-        //         eachCell !== previouslyFocusedElement
-        //     ) {
-        //         // addRedColourToWrongInput(previouslyFocusedElement, eachCell);
-        //         // previouslyFocusedElement.style.color = "red";
-        //         // eachCell.style.backgroundColor = "orange";
-        //         showWrongInput(previouslyFocusedElement, eachCell)
-        //     }
-        // });
-
-        // checkIfPuzzleIsComplete();
         const isNotEmpty = checkIfPuzzleIsComplete(cells);
 
         if (isNotEmpty) {
@@ -613,27 +842,32 @@ function handlePuzzleInput() {
     }
     getInput();
 }
-handlePuzzleInput();
+// handlePuzzleInput();
 
 function clearAllInputtedValues() {
     const restartButtons = document.querySelectorAll("[data-restart-puzzle-button]");
     const puzzle = document.querySelectorAll("[data-puzzle]");
     let interactiveCells;
+    let allCells;
 
     restartButtons.forEach((button, index) => {
         button.addEventListener("click", () => {
             interactiveCells = puzzle[index].querySelectorAll("[data-puzzle] > div:not([data-default-value])");
+            allCells = puzzle[index].querySelectorAll("[data-puzzle] > div");
 
             interactiveCells.forEach((eachCell) => {
                 eachCell.innerHTML = "";
+            });
+            allCells.forEach((eachCell) => {
+                eachCell.classList.remove("cell-is-in-wrong-row");
+                eachCell.classList.remove("cell-is-in-wrong-column");
+                eachCell.classList.remove("cell-is-in-wrong-block");
+                // eachCell.innerHTML = "";
             });
         });
     });
 }
 clearAllInputtedValues();
-
-
-
 
 function addBgColourToFocusedCellAndItsEnvironment() {
     const cells = document.querySelectorAll("[data-puzzle] > div");
@@ -672,32 +906,3 @@ function addBgColourToFocusedCellAndItsEnvironment() {
     }));
 }
 addBgColourToFocusedCellAndItsEnvironment();
-
-function addRedColourToWrongInput(wrongInput, otherOccurrenceOfWrongInput) {
-    wrongInput.classList.add("wrong-input");
-    // wrongInput.classList.add("other-occurrence-of-wrong-input");
-    otherOccurrenceOfWrongInput.classList.add("other-occurrence-of-wrong-input");
-}
-
-function removeRedColourFromWrongInput(wrongInput, otherOccurrenceOfWrongInput) {
-    wrongInput.classList.remove("wrong-input");
-    otherOccurrenceOfWrongInput.classList.remove("other-occurrence-of-wrong-input");
-    // for (let i = 0; i < otherOccurrenceOfWrongInput.length; i++) {
-    //     otherOccurrenceOfWrongInput[i].classList.remove("other-occurrence-of-wrong-input");
-    // }
-    // otherOccurrenceOfWrongInput.forEach((eachOccurrence) => {
-    //     eachOccurrence.classList.remove("other-occurrence-of-wrong-input");
-    // });
-    // console.log(otherOccurrenceOfWrongInput)
-}
-
-function showWrongInput(wrongInput, otherOccurrenceOfWrongInput) {
-    wrongInput.classList.add("wrong-input");
-    otherOccurrenceOfWrongInput.classList.add("other-occurrence-of-wrong-input");
-
-    setTimeout(() => {
-        console.log("bbb");
-        wrongInput.classList.remove("wrong-input");
-        otherOccurrenceOfWrongInput.classList.remove("other-occurrence-of-wrong-input");
-    }, 3000);
-}

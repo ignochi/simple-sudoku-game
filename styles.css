@@ -670,10 +670,14 @@ main > div {
     background-color: #d5e1ef;
 }
 
-.wrong-input {
+/* .wrong-input {
     color: rgb(249, 102, 80);
 }
 .other-occurrence-of-wrong-input {
+    background-color: rgba(249, 102, 80, 0.3);
+} */
+
+.cell-is-in-wrong-row, .cell-is-in-wrong-column, .cell-is-in-wrong-block {
     background-color: rgba(249, 102, 80, 0.3);
 }
 /*  */
