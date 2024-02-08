@@ -107,7 +107,7 @@ displayMenuItemPage();
 
 function handlePuzzleAspectRatio() {
     // I created this function as a replacement for the css aspect-ratio
-    // proerty, because it doesn't have very good browser support.
+    // property, because it doesn't have very good browser support.
 
     function resize() {
         const puzzle = document.querySelectorAll("[data-puzzle]");
@@ -182,15 +182,7 @@ function handleInputsUniqueness(cellOfInput) {
     const cellOfInputsColumn = cellOfInput.dataset.column;
     const cellOfInputBlock = cellOfInput.dataset.block;
     const cells = cellOfInput.parentNode.children;
-    // let arrayFromCells = [...cells];
     const arrayOfCells = Array.from(cells);
-    // let filteredCells = arrayFromCells.filter(function (element) {
-    //     return (
-    //         (element.getAttribute('data-row') === cellsRow && element !== previouslyFocusedElement) ||
-    //         (element.getAttribute('data-column') === cellsColumn && element !== previouslyFocusedElement) ||
-    //         (element.getAttribute('data-block') === cellsBlock && element !== previouslyFocusedElement)
-    //     )
-    // });
     const cellsInFocusedElementsRow = arrayOfCells.filter(function (element) {
         return element.getAttribute('data-row') === cellOfInputsRow;
     });
@@ -230,7 +222,6 @@ function handleInputsUniqueness(cellOfInput) {
             }
         });
     }
-    // const wrongRowAttr = (true)? "f":"g";
     markWrongInputs(cellsInFocusedElementsRow, getDuplicateNumbers(textContentOfCellsInFocusedElementsRow), "cell-is-in-wrong-row");
     markWrongInputs(cellsInFocusedElementsColumn, getDuplicateNumbers(textContentOfCellsInFocusedElementsColumn), "cell-is-in-wrong-column");
     markWrongInputs(cellsInFocusedElementsBlock, getDuplicateNumbers(textContentOfCellsInFocusedElementsBlock), "cell-is-in-wrong-block");
@@ -517,7 +508,6 @@ function handleHardLevelPuzzle() {
         cells[46].classList.add("border-bottom");
         cells[47].classList.add("border-bottom");
         cells[47].classList.add("border-right");
-
         cells[48].classList.add("border-bottom");
         cells[49].classList.add("border-bottom");
         cells[50].classList.add("border-bottom");
@@ -533,138 +523,6 @@ function handleHardLevelPuzzle() {
         cells[77].classList.add("border-right");
     }
 
-    // function getDuplicateNumbers(arr) {
-    //     const testedValues = [];
-    //     const duplicates = [];
-
-    //     for (let num of arr) {
-    //         if (testedValues.includes(num) && !(duplicates.includes(num))) {
-    //             if (num !== "") {
-    //                 duplicates.push(num);
-    //             }
-    //         }
-    //         testedValues.push(num);
-
-    //     }
-    //     // console.log("testedValues = " + testedValues);
-    //     // console.log("duplicates = " + duplicates);
-    //     console.log("duplicates")
-    //     return duplicates;
-    // }
-
-    // function markWrongInputs(nodeList, arr) {
-    //     nodeList.forEach((node) => {
-    //         if (arr.includes(node.innerHTML)) {
-    //             node.style.backgroundColor = "orange";
-    //         } else {
-    //             node.style.backgroundColor = "transparent";
-    //         }
-    //     });
-    //     // console.log(nodeList, arr);
-    // }
-
-    // function checkIfInputIsUnique() {
-    //     const arrayOfCells = Array.from(cells);
-
-    //     function checkAcrossRows() {
-    //         const row1 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "1";
-    //         });
-    //         const row2 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "2";
-    //         });
-    //         const row3 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "3";
-    //         });
-    //         const row4 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "4";
-    //         });
-    //         const row5 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "5";
-    //         });
-    //         const row6 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "6";
-    //         });
-    //         const row7 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "7";
-    //         });
-    //         const row8 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "8";
-    //         });
-    //         const row9 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-row') === "9";
-    //         });
-    //         const rowsArray = [row1, row2, row3, row4, row5, row6, row7, row8, row9];
-
-    //         for (const rows of rowsArray) {
-    //             const arrayOfCells = Array.from(rows);
-    //             const textContentOfCells = arrayOfCells.map(cell => cell.innerHTML);
-    //             // console.log(getDuplicateNumbers(textContentOfCells));
-    //             markWrongInputs(arrayOfCells, getDuplicateNumbers(textContentOfCells));
-    //         }
-    //     }
-
-    //     function checkAcrossColumns() {
-    //         const column1 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "1";
-    //         });
-    //         const column2 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "2";
-    //         });
-    //         const column3 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "3";
-    //         });
-    //         const column4 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "4";
-    //         });
-    //         const column5 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "5";
-    //         });
-    //         const column6 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "6";
-    //         });
-    //         const column7 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "7";
-    //         });
-    //         const column8 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "8";
-    //         });
-    //         const column9 = arrayOfCells.filter(function (element) {
-    //             return element.getAttribute('data-column') === "9";
-    //         });
-    //         const columnsArray = [column1, column2, column3, column4, column5, column6, column7, column8, column9];
-
-    //         for (const columns of columnsArray) {
-    //             const arrayOfCells = Array.from(columns);
-    //             const textContentOfCells = arrayOfCells.map(cell => cell.innerHTML);
-    //             console.log(arrayOfCells);
-    //             markWrongInputs(arrayOfCells, getDuplicateNumbers(textContentOfCells));
-    //         }
-    //         console.log("my name is...")
-    //     }
-
-    //     checkAcrossRows();
-    //     checkAcrossColumns();
-    // }
-
-    // function getInput() {
-    //     const numberButtons = document.querySelectorAll("[data-hard-level-puzzle-container] [data-number-button]");
-
-    //     puzzle.addEventListener("blur", function (event) {
-    //         selectedCell = event.target;
-    //     }, true);
-
-    //     numberButtons.forEach((button) => {
-    //         button.addEventListener("click", () => {
-    //             cells = selectedCell.parentNode.children;
-    //             const numberOfCells = cells.length;
-    //             const largestPossibleInput = Math.sqrt(numberOfCells);
-    //             // console.log(cells, numberOfCells, largestPossibleInput);
-    //             checkIfInputIsOutOfRange(largestPossibleInput, button.innerHTML);
-    //         });
-    //     })
-    // }
-
     setupCells(puzzle, 81);
     assignBlock();
     setDefaultValues();
@@ -672,177 +530,6 @@ function handleHardLevelPuzzle() {
     getInput(numberButtons, puzzle);
 }
 handleHardLevelPuzzle();
-
-// function checkIfPuzzleIsComplete(nodeList) {
-//     for (let i = 0; i < nodeList.length; i++) {
-//         const cell = nodeList[i];
-//         const cellContent = cell.innerHTML;
-
-//         if (cellContent === "") {
-//             // Found an empty div
-//             return false;
-//         }
-//     }
-
-//     // All divs are not empty
-//     return true;
-// }
-
-function handlePuzzleInput() {
-    // handleNumberButtonsKeyPress
-    const numberButtons = document.querySelectorAll("[data-number-button]");
-    const puzzleAttribute = "data-puzzle";
-    const puzzleDefaultValue = "data-default-value";
-    let previouslyFocusedElement;
-    let parent;
-    let cells;
-
-    function checkIfInputIsUnique() {
-        const cellsRow = previouslyFocusedElement.dataset.row;
-        const cellsColumn = previouslyFocusedElement.dataset.column;
-        const cellsBlock = previouslyFocusedElement.dataset.block;
-        // let arrayFromCells = [...cells];
-        const arrayOfCells = Array.from(cells);
-        // let filteredCells = arrayFromCells.filter(function (element) {
-        //     return (
-        //         (element.getAttribute('data-row') === cellsRow && element !== previouslyFocusedElement) ||
-        //         (element.getAttribute('data-column') === cellsColumn && element !== previouslyFocusedElement) ||
-        //         (element.getAttribute('data-block') === cellsBlock && element !== previouslyFocusedElement)
-        //     )
-        // });
-        const cellsInFocusedElementsRow = arrayOfCells.filter(function (element) {
-            return element.getAttribute('data-row') === cellsRow;
-        });
-        const cellsInFocusedElementsColumn = arrayOfCells.filter(function (element) {
-            return element.getAttribute('data-column') === cellsColumn;
-        });
-
-        const textContentOfCellsInFocusedElementsRow = cellsInFocusedElementsRow.map(cell => cell.innerHTML);
-        const textContentOfCellsInFocusedElementsColumn = cellsInFocusedElementsColumn.map(cell => cell.innerHTML);
-
-        function getDuplicateNumbers(arr) {
-            const testedValues = [];
-            const duplicates = [];
-
-            for (let num of arr) {
-                if (testedValues.includes(num) && !(duplicates.includes(num))) {
-                    if (num !== "") {
-                        duplicates.push(num);
-                    }
-                }
-                testedValues.push(num);
-
-            }
-            // console.log("testedValues = " + testedValues);
-            // console.log("duplicates = " + duplicates);
-            return duplicates;
-        }
-
-        function markWrongInputs(row, rowDuplicates, column, columnDuplicates) {
-            // nodeList.forEach((node) => {
-            // if (arr.includes(node.innerHTML)) {
-            //     node.style.backgroundColor = "orange";
-            // } else {
-            //     node.style.backgroundColor = "transparent";
-            // }
-            // });
-            for (let i = 0; i < row.length; i++) {
-                // if (rowDuplicates.includes(row[i].innerHTML)) {
-                //     row[i].style.backgroundColor = "orange";
-                // } else {
-                //     row[i].style.backgroundColor = "green";
-                // }
-
-                if (columnDuplicates.includes(column[i].innerHTML) && rowDuplicates.includes(column[i].innerHTML)) {
-                    column[i].style.backgroundColor = "orange";
-                    if (rowDuplicates.includes(row[i].innerHTML)) {
-                        row[i].style.backgroundColor = "orange";
-                    }
-                } else if (columnDuplicates.includes(column[i].innerHTML) && !(rowDuplicates.includes(column[i].innerHTML))) {
-                    column[i].style.backgroundColor = "orange";
-                } else if (!(columnDuplicates.includes(row[i].innerHTML)) && rowDuplicates.includes(row[i].innerHTML)) {
-                    row[i].style.backgroundColor = "orange";
-                    // console.log("yes")
-                } else {
-                    column[i].style.backgroundColor = "transparent";
-                    row[i].style.backgroundColor = "transparent";
-                }
-
-
-                // if (columnDuplicates.includes(column[i].innerHTML)) {
-                //     column[i].style.backgroundColor = "orange";
-                // } else {
-                //     column[i].style.backgroundColor = "green";
-                // }
-
-                // if (
-                //     columnDuplicates.includes(column[i].innerHTML) &&
-                //     !(rowDuplicates.includes(column[i].innerHTML))
-                // ) {
-                //     column[i].style.backgroundColor = "orange";
-                // }
-
-                // if (
-                //     columnDuplicates.includes(column[i].innerHTML) &&
-                //     (rowDuplicates.includes(column[i].innerHTML))
-                // ) {
-                //     column[i].style.backgroundColor = "orange";
-                //     row[i].style.backgroundColor = "orange";
-                // }
-            }
-        }
-        markWrongInputs(
-            cellsInFocusedElementsRow, getDuplicateNumbers(textContentOfCellsInFocusedElementsRow),
-            cellsInFocusedElementsColumn, getDuplicateNumbers(textContentOfCellsInFocusedElementsColumn)
-        );
-        // markWrongInputs(cellsInFocusedElementsRow, getDuplicateNumbers(textContentOfCellsInFocusedElementsRow));
-        // markWrongInputs(cellsInFocusedElementsColumn, getDuplicateNumbers(textContentOfCellsInFocusedElementsColumn));
-        // console.log(getDuplicateNumbers(textContentOfCellsInFocusedElementsRow));
-
-        const isNotEmpty = checkIfPuzzleIsComplete(cells);
-
-        if (isNotEmpty) {
-            console.log('There are no empty divs.');
-        } else {
-            console.log('There is at least one empty div.');
-        }
-    }
-
-    function checkIfInputIsOutOfRange(largestPossibleInput, input) {
-        if (input > 0 && input <= largestPossibleInput) {
-            previouslyFocusedElement.innerHTML = input;
-            checkIfInputIsUnique();
-        } else {
-            alert("Input is out of range");
-        }
-    }
-
-    function getInput() {
-        document.addEventListener('blur', function (event) {
-            previouslyFocusedElement = event.target;
-            parent = previouslyFocusedElement.parentNode;
-        }, true);
-
-        numberButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-                if (
-                    // check if the parent of the previously focused element is the puzzle
-                    parent.hasAttribute(puzzleAttribute) &&
-                    !(previouslyFocusedElement.hasAttribute(puzzleDefaultValue))
-                ) {
-                    // check if the value can be entered
-                    cells = parent.querySelectorAll("div");
-                    const numberOfCells = cells.length;
-                    const largestPossibleInput = Math.sqrt(numberOfCells);
-                    // console.log(cells, numberOfCells, largestPossibleInput);
-                    checkIfInputIsOutOfRange(largestPossibleInput, button.innerHTML);
-                }
-            });
-        })
-    }
-    getInput();
-}
-// handlePuzzleInput();
 
 function clearAllInputtedValues() {
     const restartButtons = document.querySelectorAll("[data-restart-puzzle-button]");
@@ -862,7 +549,6 @@ function clearAllInputtedValues() {
                 eachCell.classList.remove("cell-is-in-wrong-row");
                 eachCell.classList.remove("cell-is-in-wrong-column");
                 eachCell.classList.remove("cell-is-in-wrong-block");
-                // eachCell.innerHTML = "";
             });
         });
     });
