@@ -63,13 +63,31 @@ function goToMenuPage() {
         const buttons = document.querySelectorAll("[data-back-to-menu-page-button]");
         const CLASS = "display-menu-item-page-with-js";
 
-        buttons.forEach((eachButton, index) => {
-            eachButton.addEventListener("click", () => {
-                pages.item(index).classList.remove(CLASS);
-                setTabindexTo0(newPageCSSProperty, 0);
-                setTabindexToMinus1(previousPageCSSProperty, index);
+        function usingMouse() {
+            buttons.forEach((eachButton, index) => {
+                eachButton.addEventListener("click", () => {
+                    pages.item(index).classList.remove(CLASS);
+                    setTabindexTo0(newPageCSSProperty, 0);
+                    setTabindexToMinus1(previousPageCSSProperty, index);
+                });
             });
-        });
+        }
+
+        function usingKeyPress() {
+            document.addEventListener("keyup", (event) => {
+                if (event.key === "Escape") {
+                    pages.forEach((page, index) => {
+                        if (page.classList.contains(CLASS)) {
+                            page.classList.remove(CLASS);
+                            setTabindexTo0(newPageCSSProperty, 0);
+                            setTabindexToMinus1(previousPageCSSProperty, index);
+                        }
+                    });
+                }
+            });
+        }
+        usingMouse();
+        usingKeyPress();
     }
     fromMenuItemPage();
 }
@@ -305,7 +323,7 @@ function handleArrowKeypressWhenFocusIsOnACell(cells) {
             });
         });
     }
-    
+
     arrowRightKeypress();
     arrowLeftKeypress();
     arrowDownKeypress();
@@ -398,20 +416,43 @@ function handleOutOfRangeInputs(largestPossibleInput, input, selectedCell) {
 function getInput(numberButtons, puzzle) {
     let selectedCell;
 
-    puzzle.addEventListener("blur", function (event) {
-        selectedCell = event.target;
-    }, true);
+    function fromMouseUsers() {
+        puzzle.addEventListener("blur", function (event) {
+            selectedCell = event.target;
+        }, true);
 
-    numberButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            if (!(selectedCell.hasAttribute("data-default-value"))) {
-                const cells = selectedCell.parentNode.children;
-                const numberOfCells = cells.length;
-                const largestPossibleInput = Math.sqrt(numberOfCells);
-                handleOutOfRangeInputs(largestPossibleInput, button.innerHTML, selectedCell);
-            }
-        });
-    })
+        numberButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                if (!(selectedCell.hasAttribute("data-default-value"))) {
+                    const cells = selectedCell.parentNode.children;
+                    const numberOfCells = cells.length;
+                    const largestPossibleInput = Math.sqrt(numberOfCells);
+                    handleOutOfRangeInputs(largestPossibleInput, button.innerHTML, selectedCell);
+                }
+            });
+        })
+    }
+
+    function fromKeyboardUsers() {
+        puzzle.addEventListener("focus", function (event) {
+            selectedCell = event.target;
+            selectedCell.addEventListener("keypress", (event) => {
+                if (!(selectedCell.hasAttribute("data-default-value"))) {
+                    const cells = selectedCell.parentNode.children;
+                    const numberOfCells = cells.length;
+                    const largestPossibleInput = Math.sqrt(numberOfCells);
+                    handleOutOfRangeInputs(largestPossibleInput, event.key, selectedCell);
+                }
+            });
+        }, true);
+        // 1. get the cells
+        // 2. add a focus event listener to each of them
+        // 3. on focus, add a keypress event listener to the focused cell
+        // 4. when any of the number keys are pressed, the innerHTML of the focused cell
+        // is set to be equal to the value of the button
+    }
+    fromMouseUsers();
+    fromKeyboardUsers();
 }
 
 function handleEasyLevelPuzzle() {
@@ -559,7 +600,7 @@ function handleMediumLevelPuzzle() {
     assignBlock();
     setDefaultValues();
     PutBorderBetweenBlocks();
-    
+
     const cells = document.querySelectorAll("[data-medium-level-puzzle] div");
     handleArrowKeypressWhenFocusIsOnACell(cells);
     getInput(numberButtons, puzzle);
@@ -684,7 +725,7 @@ function handleHardLevelPuzzle() {
     assignBlock();
     setDefaultValues();
     PutBorderBetweenBlocks();
-    
+
     const cells = document.querySelectorAll("[data-hard-level-puzzle] div");
     handleArrowKeypressWhenFocusIsOnACell(cells);
     getInput(numberButtons, puzzle);
