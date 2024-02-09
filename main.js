@@ -199,6 +199,119 @@ function setupCells(puzzle, totalNoOfCells) {
     setTabindex();
 }
 
+function handleArrowKeypressWhenFocusIsOnACell(cells) {
+    const arrayOfCells = Array.from(cells);
+
+    function arrowRightKeypress() {
+        cells.forEach((cell) => {
+            cell.addEventListener("focus", (event) => {
+                const focusedCell = event.target;
+                const focusedCellsRow = focusedCell.getAttribute("data-row");
+                const cellsInFocusedCellsRow = arrayOfCells.filter(function (cells) {
+                    return cells.getAttribute("data-row") === focusedCellsRow;
+                });
+
+                cellsInFocusedCellsRow.forEach((cell, index) => {
+                    const isLastMenuItem = index === cellsInFocusedCellsRow.length - 1;
+
+                    cell.addEventListener("keyup", function (event) {
+                        if (event.key === "ArrowRight") {
+                            if (isLastMenuItem) {
+                                cellsInFocusedCellsRow[0].focus();
+                            } else {
+                                cellsInFocusedCellsRow[index + 1].focus();
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+
+    function arrowLeftKeypress() {
+        cells.forEach((cell) => {
+            cell.addEventListener("focus", (event) => {
+                const focusedCell = event.target;
+                const focusedCellsRow = focusedCell.getAttribute("data-row");
+                const cellsInFocusedCellsRow = arrayOfCells.filter(function (cells) {
+                    return cells.getAttribute("data-row") === focusedCellsRow;
+                });
+
+                cellsInFocusedCellsRow.forEach((cell, index) => {
+                    const isFirstMenuItem = index === 0;
+
+                    cell.addEventListener("keyup", function (event) {
+                        if (event.key === "ArrowLeft") {
+                            if (isFirstMenuItem) {
+                                cellsInFocusedCellsRow[cellsInFocusedCellsRow.length - 1].focus();
+                            } else {
+                                cellsInFocusedCellsRow[index - 1].focus();
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+
+    function arrowDownKeypress() {
+        cells.forEach((cell) => {
+            cell.addEventListener("focus", (event) => {
+                const focusedCell = event.target;
+                const focusedCellsColumn = focusedCell.getAttribute("data-column");
+                const cellsInFocusedCellsColumn = arrayOfCells.filter(function (cells) {
+                    return cells.getAttribute("data-column") === focusedCellsColumn;
+                });
+
+                cellsInFocusedCellsColumn.forEach((cell, index) => {
+                    const isLastMenuItem = index === cellsInFocusedCellsColumn.length - 1;
+
+                    cell.addEventListener("keyup", function (event) {
+                        if (event.key === "ArrowDown") {
+                            if (isLastMenuItem) {
+                                cellsInFocusedCellsColumn[0].focus();
+                            } else {
+                                cellsInFocusedCellsColumn[index + 1].focus();
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+
+    function arrowUpKeypress() {
+        cells.forEach((cell) => {
+            cell.addEventListener("focus", (event) => {
+                const focusedCell = event.target;
+                const focusedCellscolumn = focusedCell.getAttribute("data-column");
+                const cellsInFocusedCellsColumn = arrayOfCells.filter(function (cells) {
+                    return cells.getAttribute("data-column") === focusedCellscolumn;
+                });
+
+                cellsInFocusedCellsColumn.forEach((cell, index) => {
+                    const isFirstMenuItem = index === 0;
+
+                    cell.addEventListener("keyup", function (event) {
+                        if (event.key === "ArrowUp") {
+                            if (isFirstMenuItem) {
+                                cellsInFocusedCellsColumn[cellsInFocusedCellsColumn.length - 1].focus();
+                            } else {
+                                cellsInFocusedCellsColumn[index - 1].focus();
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    }
+    
+    arrowRightKeypress();
+    arrowLeftKeypress();
+    arrowDownKeypress();
+    arrowUpKeypress();
+}
+
 function checkIfPuzzleIsComplete(nodeList) {
     for (let i = 0; i < nodeList.length; i++) {
         const cell = nodeList[i];
@@ -360,6 +473,9 @@ function handleEasyLevelPuzzle() {
     assignBlock();
     setDefaultValues();
     PutBorderBetweenBlocks();
+
+    const cells = document.querySelectorAll("[data-easy-level-puzzle] div");
+    handleArrowKeypressWhenFocusIsOnACell(cells);
     getInput(numberButtons, puzzle);
 }
 handleEasyLevelPuzzle();
@@ -443,6 +559,9 @@ function handleMediumLevelPuzzle() {
     assignBlock();
     setDefaultValues();
     PutBorderBetweenBlocks();
+    
+    const cells = document.querySelectorAll("[data-medium-level-puzzle] div");
+    handleArrowKeypressWhenFocusIsOnACell(cells);
     getInput(numberButtons, puzzle);
 }
 handleMediumLevelPuzzle();
@@ -565,6 +684,9 @@ function handleHardLevelPuzzle() {
     assignBlock();
     setDefaultValues();
     PutBorderBetweenBlocks();
+    
+    const cells = document.querySelectorAll("[data-hard-level-puzzle] div");
+    handleArrowKeypressWhenFocusIsOnACell(cells);
     getInput(numberButtons, puzzle);
 }
 handleHardLevelPuzzle();
