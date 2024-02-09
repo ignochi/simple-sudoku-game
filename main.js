@@ -75,6 +75,44 @@ function goToMenuPage() {
 }
 goToMenuPage();
 
+function handleArrowRightAndArrowDownKeypressOnMenuItems() {
+    const menuItems = document.querySelectorAll("[data-menu-page] button");
+
+    menuItems.forEach((eachMenuItem, index) => {
+        const isLastMenuItem = index === menuItems.length - 1;
+
+        eachMenuItem.addEventListener("keyup", function (event) {
+            if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                if (isLastMenuItem) {
+                    menuItems[0].focus();
+                } else {
+                    menuItems.item(index + 1).focus();
+                }
+            }
+        });
+    });
+}
+handleArrowRightAndArrowDownKeypressOnMenuItems();
+
+function handleArrowUpAndArrowLeftKeypressOnMenuItems() {
+    const menuItems = document.querySelectorAll("[data-menu-page] button");
+
+    menuItems.forEach((eachMenuItem, index) => {
+        const isFirstMenuItem = index === 0;
+
+        eachMenuItem.addEventListener("keyup", function (event) {
+            if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+                if (isFirstMenuItem) {
+                    menuItems[menuItems.length - 1].focus();
+                } else {
+                    menuItems.item(index - 1).focus();
+                }
+            }
+        });
+    });
+}
+handleArrowUpAndArrowLeftKeypressOnMenuItems();
+
 function goToHomePage() {
     const page = document.querySelector("[data-home-and-menu-page-container]");
     const previousPageCSSProperty = "data-menu-page";
