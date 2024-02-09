@@ -19,7 +19,8 @@ main {
 
 main>div {
     width: 200%;
-    height: 80%;
+    height: 100%;
+    max-height: 550px;
     /* background-color: green; */
     position: relative;
     top: 50%;
@@ -32,6 +33,7 @@ main>div {
 
     display: flex;
     flex-direction: row;
+    /* background-color: red; */
 }
 
 /* home page */
@@ -45,7 +47,7 @@ main>div {
 .game-title {
     text-align: center;
     padding-top: 0;
-    margin-bottom: 80px;
+    /* margin-bottom: 80px; */
     user-select: none;
 }
 
@@ -80,8 +82,8 @@ main>div {
     width: 125px;
     height: 35px;
     border-radius: 12px;
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 50%;
+    transform: translateX(-50%); */
 }
 
 .home-page-play-button {
@@ -92,6 +94,10 @@ main>div {
     color: black;
     cursor: pointer;
     user-select: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .home-page-play-button>span {
@@ -140,17 +146,17 @@ main>div {
     font-size: 22px;
 }
 
-@media (max-width: 360px) {
-    .game-title {
+@media (max-height: 320px) {
+    /* .game-title {
         margin-bottom: 50px;
-    }
+    } */
 
     .random-facts {
         padding: 8px 13px;
     }
 
     .random-facts-header {
-        margin-bottom: 8px;
+        margin-bottom: 4px;
         font-size: 22px;
     }
 
@@ -190,6 +196,12 @@ main>div {
     background-color: transparent;
     cursor: pointer;
     user-select: none;
+}
+
+@media (max-width: 320px) or (max-height: 320px) {
+    .menu-item {
+        font-size: 22px;
+    }
 }
 
 .menu-item-page {
