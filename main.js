@@ -47,9 +47,12 @@ function goToMenuPage() {
         const newPageCSSProperty = "data-menu-page";
         const previousPageCSSProperty = "data-home-page";
         const button = document.querySelector("[data-go-to-menu-page-button]");
+        // const firstMenuItem = document.querySelector("[data-menu-item]");
 
         button.addEventListener("click", () => {
             page.style.translate = "-100vw";
+            // console.log(firstMenuItem);
+            // firstMenuItem.focus();
             setTabindexTo0(newPageCSSProperty, 0);
             setTabindexToMinus1(previousPageCSSProperty, 0);
         });
@@ -156,6 +159,12 @@ function displayMenuItemPage() {
             pages.item(index).classList.add(CLASS);
             setTabindexTo0(newPageCSSProperty, index);
             setTabindexToMinus1(previousPageCSSProperty, 0);
+
+            // focus on the first cell in a puzzle once the puzzle page is opened
+            if (pages.item(index).hasAttribute("data-puzzle-page")) {
+                const cells = pages.item(index).querySelectorAll(".cell");
+                cells.item(0).focus();
+            }
         });
     });
 }
@@ -406,6 +415,8 @@ function handleInputsUniqueness(cellOfInput) {
 
 function handleOutOfRangeInputs(largestPossibleInput, input, selectedCell) {
     if (input === "r") {
+        // to enable you press the "r" button.
+        // the "r" button has a purpose that is specified in the clearAllInputtedValues function
         return;
     } else if (input > 0 && input <= largestPossibleInput) {
         selectedCell.innerHTML = input;
@@ -745,7 +756,7 @@ function clearAllInputtedValues() {
             button.addEventListener("click", () => {
                 interactiveCells = puzzle[index].querySelectorAll("[data-puzzle] > div:not([data-default-value])");
                 allCells = puzzle[index].querySelectorAll("[data-puzzle] > div");
-    
+
                 interactiveCells.forEach((eachCell) => {
                     eachCell.innerHTML = "";
                 });
@@ -762,7 +773,7 @@ function clearAllInputtedValues() {
         const pages = document.querySelectorAll("[data-puzzle-page]");
         const CLASS = "display-menu-item-page-with-js";
         let allCellsArr;
-        
+
         document.addEventListener("keyup", (event) => {
             if (event.key === "r") {
                 pages.forEach((page) => {
@@ -771,7 +782,7 @@ function clearAllInputtedValues() {
                         interactiveCells = page.querySelectorAll("[data-puzzle] > div:not([data-default-value])");
                         allCells = interactiveCells[0].parentNode.children;
                         allCellsArr = Array.from(allCells);
-            
+
                         interactiveCells.forEach((eachCell) => {
                             eachCell.innerHTML = "";
                         });
