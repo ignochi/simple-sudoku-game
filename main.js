@@ -41,20 +41,28 @@ function handleRandomFact() {
 }
 handleRandomFact();
 
+function giveFirstMenuItemFocusByDefault() {
+    // If i give the first menu item focus without using the setTimeout()
+    // function, it affects the transition of the page and I don't know why
+    setTimeout(() => {
+        const firstMenuItem = document.querySelector("[data-menu-item]");
+        firstMenuItem.focus();
+    }, 100);
+}
+
 function goToMenuPage() {
     function fromHomePage() {
         const page = document.querySelector("[data-home-and-menu-page-container]");
         const newPageCSSProperty = "data-menu-page";
         const previousPageCSSProperty = "data-home-page";
         const button = document.querySelector("[data-go-to-menu-page-button]");
-        // const firstMenuItem = document.querySelector("[data-menu-item]");
 
         button.addEventListener("click", () => {
             page.style.translate = "-100vw";
-            // console.log(firstMenuItem);
-            // firstMenuItem.focus();
             setTabindexTo0(newPageCSSProperty, 0);
             setTabindexToMinus1(previousPageCSSProperty, 0);
+            
+            giveFirstMenuItemFocusByDefault();
         });
     }
     fromHomePage();
@@ -72,6 +80,8 @@ function goToMenuPage() {
                     pages.item(index).classList.remove(CLASS);
                     setTabindexTo0(newPageCSSProperty, 0);
                     setTabindexToMinus1(previousPageCSSProperty, index);
+
+                    giveFirstMenuItemFocusByDefault();
                 });
             });
         }
@@ -84,6 +94,8 @@ function goToMenuPage() {
                             page.classList.remove(CLASS);
                             setTabindexTo0(newPageCSSProperty, 0);
                             setTabindexToMinus1(previousPageCSSProperty, index);
+
+                            giveFirstMenuItemFocusByDefault();
                         }
                     });
                 }

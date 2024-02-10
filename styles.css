@@ -7,6 +7,8 @@
 body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow: hidden;
+
+    background-color: #b0916e;
 }
 
 main {
