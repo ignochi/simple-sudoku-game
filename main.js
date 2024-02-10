@@ -405,7 +405,9 @@ function handleInputsUniqueness(cellOfInput) {
 }
 
 function handleOutOfRangeInputs(largestPossibleInput, input, selectedCell) {
-    if (input > 0 && input <= largestPossibleInput) {
+    if (input === "r") {
+        return;
+    } else if (input > 0 && input <= largestPossibleInput) {
         selectedCell.innerHTML = input;
         handleInputsUniqueness(selectedCell);
     } else {
@@ -738,21 +740,54 @@ function clearAllInputtedValues() {
     let interactiveCells;
     let allCells;
 
-    restartButtons.forEach((button, index) => {
-        button.addEventListener("click", () => {
-            interactiveCells = puzzle[index].querySelectorAll("[data-puzzle] > div:not([data-default-value])");
-            allCells = puzzle[index].querySelectorAll("[data-puzzle] > div");
-
-            interactiveCells.forEach((eachCell) => {
-                eachCell.innerHTML = "";
-            });
-            allCells.forEach((eachCell) => {
-                eachCell.classList.remove("cell-is-in-wrong-row");
-                eachCell.classList.remove("cell-is-in-wrong-column");
-                eachCell.classList.remove("cell-is-in-wrong-block");
+    function usingMouse() {
+        restartButtons.forEach((button, index) => {
+            button.addEventListener("click", () => {
+                interactiveCells = puzzle[index].querySelectorAll("[data-puzzle] > div:not([data-default-value])");
+                allCells = puzzle[index].querySelectorAll("[data-puzzle] > div");
+    
+                interactiveCells.forEach((eachCell) => {
+                    eachCell.innerHTML = "";
+                });
+                allCells.forEach((eachCell) => {
+                    eachCell.classList.remove("cell-is-in-wrong-row");
+                    eachCell.classList.remove("cell-is-in-wrong-column");
+                    eachCell.classList.remove("cell-is-in-wrong-block");
+                });
             });
         });
-    });
+    }
+
+    function usingKeyPress() {
+        const pages = document.querySelectorAll("[data-puzzle-page]");
+        const CLASS = "display-menu-item-page-with-js";
+        let allCellsArr;
+        
+        document.addEventListener("keyup", (event) => {
+            if (event.key === "r") {
+                pages.forEach((page) => {
+                    if (page.classList.contains(CLASS)) {
+                        console.log()
+                        interactiveCells = page.querySelectorAll("[data-puzzle] > div:not([data-default-value])");
+                        allCells = interactiveCells[0].parentNode.children;
+                        allCellsArr = Array.from(allCells);
+            
+                        interactiveCells.forEach((eachCell) => {
+                            eachCell.innerHTML = "";
+                        });
+                        allCellsArr.forEach((eachCell) => {
+                            eachCell.classList.remove("cell-is-in-wrong-row");
+                            eachCell.classList.remove("cell-is-in-wrong-column");
+                            eachCell.classList.remove("cell-is-in-wrong-block");
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    usingMouse();
+    usingKeyPress();
 }
 clearAllInputtedValues();
 
