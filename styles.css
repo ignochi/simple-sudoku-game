@@ -288,14 +288,22 @@ main>div {
     color: rgb(48, 45, 116);
 }
 
-.puzzle>div[data-default-value] {
-    color: #000;
-}
-
-.puzzle>div:focus {
+.cell:focus {
     outline: none;
     background-color: rgb(180, 217, 250)
 }
+
+/* .puzzle>div[data-default-value] {
+    color: #000;
+} */
+[data-default-value] {
+    color: #000;
+}
+
+/* .puzzle>div:focus {
+    outline: none;
+    background-color: rgb(180, 217, 250)
+} */
 
 /* states of the cells and their inputs (added with Js) */
 .focused-cells-environment {
@@ -317,9 +325,9 @@ main>div {
 
 /*  */
 
-.default-value {
+/* .default-value {
     background-color: white;
-}
+} */
 
 .easy-level-puzzle {
     grid-template-columns: auto auto auto auto;
