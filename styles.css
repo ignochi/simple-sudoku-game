@@ -9,6 +9,7 @@ body {
     overflow: hidden;
 
     background-color: #b0916e;
+    /* background-image: url(images/annie-spratt-xvU-X0GV9-o-unsplash.jpg); */
 }
 
 main {
@@ -17,6 +18,7 @@ main {
     height: 100svh;
 
     background-color: #b0916e;
+    background-image: url(images/annie-spratt-xvU-X0GV9-o-unsplash.jpg);
 }
 
 main>div {
@@ -200,6 +202,10 @@ main>div {
     user-select: none;
 }
 
+.menu-item:focus {
+    background-color: red;
+}
+
 @media (max-width: 320px) or (max-height: 320px) {
     .menu-item {
         font-size: 22px;
@@ -208,6 +214,7 @@ main>div {
 
 .menu-item-page {
     background-color: #b0916e;
+    background-image: url(images/marjan-blan-_kUxT8WkoeY-unsplash.jpg);
     position: fixed;
     top: -100%;
     left: 0;

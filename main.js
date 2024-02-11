@@ -47,7 +47,7 @@ function giveFirstMenuItemFocusByDefault() {
     setTimeout(() => {
         const firstMenuItem = document.querySelector("[data-menu-item]");
         firstMenuItem.focus();
-    }, 100);
+    }, 500);
 }
 
 function goToMenuPage() {
