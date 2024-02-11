@@ -352,19 +352,28 @@ div.border-right {
 div.border-bottom {
     border-bottom: 2px solid rgb(48, 45, 116);
 }
-
 /*  */
 
 .puzzle-keyboard {
     width: 100%;
     max-width: 350px;
-
-    /* background-color: red; */
-
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto;
     column-gap: 5px;
     row-gap: 10px;
+}
+
+.easy-level-puzzle-keyboard {
+    grid-template-columns: auto auto auto auto;
+    justify-content: center;
+}
+
+.medium-level-puzzle-keyboard {
+    grid-template-columns: auto auto auto auto auto auto;
+    justify-content: center;
+}
+
+.hard-level-puzzle-keyboard {
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
 }
 
 .puzzle-keyboard>button {
@@ -382,11 +391,27 @@ div.border-bottom {
     /* background-color: rgb(1, 1, 52); */
 }
 
+.easy-level-puzzle-keyboard>button:not(:last-child),
+.medium-level-puzzle-keyboard>button:not(:last-child) {
+    padding: 7px 12px;
+}
+
 .restart-puzzle-button {
     padding: 10px 0;
-    grid-column: 3 / span 5;
     background-color: rgb(107, 112, 212);
     color: #fff;
+}
+
+.easy-level-puzzle-keyboard > .restart-puzzle-button {
+    grid-column: 1 / span 4;
+}
+
+.medium-level-puzzle-keyboard > .restart-puzzle-button {
+    grid-column: 1 / span 6;
+}
+
+.hard-level-puzzle-keyboard > .restart-puzzle-button {
+    grid-column: 3 / span 5;
 }
 
 @media (min-width: 768px) {
@@ -401,19 +426,45 @@ div.border-bottom {
     }
 
     .puzzle-keyboard {
+        gap: 5px;
+    }
+
+    .easy-level-puzzle-keyboard {
+        max-width: 200px;
+        grid-template-columns: auto auto auto;
+        justify-content: unset;
+    }
+
+    .medium-level-puzzle-keyboard {
+        max-width: 200px;
+        grid-template-columns: auto auto auto;
+        justify-content: unset;
+    }
+
+    .hard-level-puzzle-keyboard {
         width: auto;
         height: 280px;
         grid-template-columns: 75px 75px 75px;
         grid-template-rows: auto auto auto 55px;
-        gap: 5px;
+        justify-content: unset;
+    }
+
+    .easy-level-puzzle-keyboard > .restart-puzzle-button {
+        grid-column: 2 / span 2;
+        margin-top: 0;
+    }
+
+    .medium-level-puzzle-keyboard > .restart-puzzle-button {
+        grid-column: 1 / span 3;
+        margin-top: 5px;
+    }
+
+    .hard-level-puzzle-keyboard > .restart-puzzle-button {
+        grid-column: 1 / span 3;
+        margin-top: 5px;
     }
 
     .puzzle-keyboard>button:not(:last-child) {
         font-size: 30px;
-    }
-
-    .restart-puzzle-button {
-        grid-column: 1 / span 3;
-        margin-top: 5px;
     }
 }
