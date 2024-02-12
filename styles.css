@@ -18,7 +18,15 @@ main {
     height: 100svh;
 
     background-color: #b0916e;
-    background-image: url(images/annie-spratt-xvU-X0GV9-o-unsplash.jpg);
+    background-image: url(images/body-mobile-image.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+@media (min-width: 992px) {
+    main {
+        background-image: url(images/body-desktop-image.png);
+    }
 }
 
 main>div {
@@ -86,11 +94,6 @@ main>div {
     width: 125px;
     height: 35px;
     border-radius: 12px;
-    /* left: 50%;
-    transform: translateX(-50%); */
-}
-
-.home-page-play-button {
     border: none;
     font-size: 20px;
     letter-spacing: 2px;
@@ -102,6 +105,12 @@ main>div {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.home-page-play-button:focus {
+    border: none;
+    outline: 2px solid rgba(112, 94, 70, 1);
+    outline-offset: 1px;
 }
 
 .home-page-play-button>span {
@@ -128,19 +137,23 @@ main>div {
     padding: 10px 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    background-color: rgb(112, 94, 70);
+    /* background-color: rgb(112, 94, 70); */
+    background-color: rgba(112, 94, 70, 0.5);
 }
 
 .random-facts::before {
     content: " ";
-    background-color: rgb(112, 94, 70);
+    /* background-color: rgb(112, 94, 70); */
+    background-color: rgba(112, 94, 70, 0.5);
     width: 10px;
     height: 10px;
     position: absolute;
-    top: 0;
-    left: -4px;
+    top: -0.5px;
+    /* left: -4px; */
+    left: -9.5px;
     display: inline-block;
-    transform: skewX(40deg);
+    /* transform: skewX(40deg); */
+    clip-path: polygon(100% 100%, 100% 0%, 0% 0%);
 }
 
 .random-facts-header {
@@ -193,17 +206,26 @@ main>div {
 }
 
 .menu-item {
+    padding: 2px 15px;
     font-size: 25px;
     font-weight: 600;
     border: none;
+    border-radius: 6px;
     font-family: cursive;
     background-color: transparent;
     cursor: pointer;
     user-select: none;
+    transition: all 200ms ease-in;
+}
+
+.menu-item:hover {
+    background-color: rgba(112, 94, 70, 0.5);
 }
 
 .menu-item:focus {
-    background-color: red;
+    border: none;
+    outline: 2px solid rgba(112, 94, 70, 1);
+    /* outline-offset: 1px; */
 }
 
 @media (max-width: 320px) or (max-height: 320px) {
@@ -214,7 +236,6 @@ main>div {
 
 .menu-item-page {
     background-color: #b0916e;
-    background-image: url(images/marjan-blan-_kUxT8WkoeY-unsplash.jpg);
     position: fixed;
     top: -100%;
     left: 0;
@@ -233,10 +254,16 @@ main>div {
 .puzzle-page {
     /* rgb(48, 45, 116) */
     background-color: #f0eefc;
-    /* background-color: #b0916e; */
-    /* background-image: url(images/paper.jpeg);
+    
+    background-image: url(images/puzzle-mobile-image.png);
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-size: cover; */
+}
+
+@media (min-width: 992px) {
+    .puzzle-page {
+        background-image: url(images/puzzle-desktop-image.png);
+    }
 }
 
 .back-to-main-menu-button {
@@ -257,6 +284,14 @@ main>div {
     color: black;
     cursor: pointer;
     user-select: none;
+    transition: all 200ms ease-in;
+}
+
+.back-to-main-menu-button:focus {
+    border: none;
+    border-radius: 6px;
+    outline: 2px solid rgba(112, 94, 70, 1);
+    outline-offset: 1px;
 }
 
 .back-to-main-menu-button>span {
@@ -293,11 +328,18 @@ main>div {
     align-items: center;
     font-size: 30px;
     color: rgb(48, 45, 116);
+    transition: all 200ms ease-in;
+}
+
+.cell:hover {
+    background-color: #c9ced4;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .cell:focus {
     outline: none;
-    background-color: rgb(180, 217, 250)
+    /* background-color: rgb(180, 217, 250); */
+    background-color: rgba(180, 217, 250, 0.7);
 }
 
 /* .puzzle>div[data-default-value] {
@@ -314,7 +356,8 @@ main>div {
 
 /* states of the cells and their inputs (added with Js) */
 .focused-cells-environment {
-    background-color: #d5e1ef;
+    /* background-color: #d5e1ef; */
+    background-color: rgba(213, 225, 239, 0.7);
 }
 
 /* .wrong-input {
@@ -388,14 +431,27 @@ div.border-bottom {
     border-radius: 3px;
     cursor: pointer;
     user-select: none;
+    transition: all 200ms ease-in;
+}
+
+.puzzle-keyboard>button:focus {
+    border: none;
+    outline: 2px solid rgba(112, 94, 70, 1);
+    outline-offset: 1px;
 }
 
 .puzzle-keyboard>button:not(:last-child) {
     font-size: 22px;
-    background-color: rgba(48, 45, 116, 0.2);
+    /* background-color: rgba(48, 45, 116, 0.2); */
     background-color: #e0e6ee;
     color: rgb(107, 112, 212);
     /* background-color: rgb(1, 1, 52); */
+}
+
+.puzzle-keyboard>button:not(:last-child):hover {
+    /* background-color: rgba(224, 230, 238, 0.7);
+    background-color: #c9ced4; */
+    background-color: #d4dbe2;
 }
 
 .easy-level-puzzle-keyboard>button:not(:last-child),
@@ -407,6 +463,10 @@ div.border-bottom {
     padding: 10px 0;
     background-color: rgb(107, 112, 212);
     color: #fff;
+}
+
+.restart-puzzle-button:hover {
+    background-color: rgb(100, 105, 195);
 }
 
 .easy-level-puzzle-keyboard > .restart-puzzle-button {

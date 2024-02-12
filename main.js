@@ -1,5 +1,14 @@
 "use strict";
 
+function giveHomePageButtonFocusWhenThePageIsLoaded() {
+    const homePageButton = document.querySelector("[data-go-to-menu-page-button]");
+
+    window.addEventListener("load", () => {
+        homePageButton.focus();
+    });
+}
+giveHomePageButtonFocusWhenThePageIsLoaded();
+
 function setTabindexTo0(CSSProperty, index) {
     const pages = document.querySelectorAll(`[${CSSProperty}]`);
     const focusableElements = pages[index].querySelectorAll('button[tabindex="-1"], [tabindex="-1"]');
@@ -151,10 +160,14 @@ function goToHomePage() {
     const previousPageCSSProperty = "data-menu-page";
     const newPageCSSProperty = "data-home-page";
     const button = document.querySelector("[data-go-to-home-page-button]");
+    const homePageButton = document.querySelector("[data-go-to-menu-page-button]");
+
     button.addEventListener("click", () => {
         page.style.translate = "0vw";
         setTabindexTo0(newPageCSSProperty, 0);
         setTabindexToMinus1(previousPageCSSProperty, 0);
+
+        homePageButton.focus();
     });
 }
 goToHomePage();
