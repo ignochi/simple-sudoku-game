@@ -4,20 +4,31 @@
     box-sizing: border-box;
 }
 
+*::selection {
+    color: var(--puzzle-bg-colour, #f0eefc);
+    background-color: var(--text, #000);
+}
+
+:root {
+    --text: #000;
+    --carton-colour: #b0916e;
+    --teal-button: #008080;
+    --outline-colour: rgba(112, 94, 70, 0.5);
+    --puzzle-bg-colour: #f0eefc;
+    --puzzle-border-colour: rgb(48, 45, 116);
+    --restart-puzzle-button-bg-colour: var(--restart-puzzle-button-bg-colour, rgb(107, 112, 212));
+}
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow: hidden;
-
-    background-color: #b0916e;
-    /* background-image: url(images/annie-spratt-xvU-X0GV9-o-unsplash.jpg); */
+    background-color: var(--carton-colour, #b0916e);
 }
 
 main {
     width: 100%;
     height: 100vh;
     height: 100svh;
-
-    background-color: #b0916e;
     background-image: url(images/body-mobile-image.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -29,23 +40,19 @@ main {
     }
 }
 
-main>div {
+main > div {
     width: 200%;
     height: 100%;
     max-height: 550px;
-    /* background-color: green; */
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-
     transition: all 200ms linear;
     -moz-transition: all 200ms linear;
     -webkit-transition: all 200ms linear;
     -o-transition: all 200ms linear;
-
     display: flex;
     flex-direction: row;
-    /* background-color: red; */
 }
 
 /* home page */
@@ -59,19 +66,18 @@ main>div {
 .game-title {
     text-align: center;
     padding-top: 0;
-    /* margin-bottom: 80px; */
-    user-select: none;
 }
 
-.game-title>div {
-    font-size: 14px;
-}
-
-.game-title>h1 {
+.game-title > h1 {
     margin: 0;
     font-family: cursive;
     font-size: 50px;
     padding: 0;
+    user-select: none;
+}
+
+.game-title > div {
+    font-size: 14px;
 }
 
 .wave-animated-button {
@@ -79,7 +85,7 @@ main>div {
     position: relative;
 }
 
-.wave-animated-button>span {
+.wave-animated-button > span {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -97,8 +103,8 @@ main>div {
     border: none;
     font-size: 20px;
     letter-spacing: 2px;
-    background-color: teal;
-    color: black;
+    background-color: var(--teal-button, teal);
+    color: var(--text);
     cursor: pointer;
     user-select: none;
     position: absolute;
@@ -109,11 +115,11 @@ main>div {
 
 .home-page-play-button:focus {
     border: none;
-    outline: 2px solid rgba(112, 94, 70, 1);
+    outline: 2px solid var(--outline-colour, rgba(112, 94, 70, 0.5));
     outline-offset: 1px;
 }
 
-.home-page-play-button>span {
+.home-page-play-button > span {
     width: 10px;
     height: 10px;
     outline: 5px solid rgba(255, 0, 0, 0.3);
@@ -137,22 +143,18 @@ main>div {
     padding: 10px 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    /* background-color: rgb(112, 94, 70); */
-    background-color: rgba(112, 94, 70, 0.5);
+    background-color: var(--outline-colour, rgba(112, 94, 70, 0.5));
 }
 
 .random-facts::before {
-    content: " ";
-    /* background-color: rgb(112, 94, 70); */
-    background-color: rgba(112, 94, 70, 0.5);
+    content: "";
+    background-color: var(--outline-colour, rgba(112, 94, 70, 0.5));
     width: 10px;
     height: 10px;
     position: absolute;
     top: -0.5px;
-    /* left: -4px; */
     left: -9.5px;
     display: inline-block;
-    /* transform: skewX(40deg); */
     clip-path: polygon(100% 100%, 100% 0%, 0% 0%);
 }
 
@@ -164,10 +166,6 @@ main>div {
 }
 
 @media (max-height: 320px) {
-    /* .game-title {
-        margin-bottom: 50px;
-    } */
-
     .random-facts {
         padding: 8px 13px;
     }
@@ -187,8 +185,6 @@ main>div {
 .menu-page {
     width: 100vw;
     height: 100%;
-
-    /* background-color: yellow; */
     position: relative;
 }
 
@@ -201,8 +197,6 @@ main>div {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-
-    /* background-color: blue; */
 }
 
 .menu-item {
@@ -219,13 +213,13 @@ main>div {
 }
 
 .menu-item:hover {
-    background-color: rgba(112, 94, 70, 0.5);
+    background-color: var(--outline-colour, rgba(112, 94, 70, 0.5));
 }
 
 .menu-item:focus {
     border: none;
-    outline: 2px solid rgba(112, 94, 70, 1);
-    /* outline-offset: 1px; */
+    outline: 2px solid var(--outline-colour, rgba(112, 94, 70, 0.5));
+    outline-offset: 1px;
 }
 
 @media (max-width: 320px) or (max-height: 320px) {
@@ -235,7 +229,7 @@ main>div {
 }
 
 .menu-item-page {
-    background-color: #b0916e;
+    background-color: var(--carton-colour, #b0916e);
     position: fixed;
     top: -100%;
     left: 0;
@@ -252,9 +246,7 @@ main>div {
 }
 
 .puzzle-page {
-    /* rgb(48, 45, 116) */
-    background-color: #f0eefc;
-    
+    background-color: var(--puzzle-bg-colour, #f0eefc);
     background-image: url(images/puzzle-mobile-image.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -270,18 +262,14 @@ main>div {
     width: 100px;
     border-radius: 8px;
     transform: skewX(10deg);
-
     margin-bottom: 20px;
-}
-
-.back-to-main-menu-button {
     border: none;
     font-size: 14px;
     padding: 5px 0;
     transform: skewX(-10deg);
     letter-spacing: 1px;
-    background-color: teal;
-    color: black;
+    background-color: var(--teal-button, teal);
+    color: var(--text, #000);
     cursor: pointer;
     user-select: none;
     transition: all 200ms ease-in;
@@ -290,11 +278,12 @@ main>div {
 .back-to-main-menu-button:focus {
     border: none;
     border-radius: 6px;
+    /* outline: 2px solid var(--outline-colour, rgba(112, 94, 70, 0.5)); */
     outline: 2px solid rgba(112, 94, 70, 1);
     outline-offset: 1px;
 }
 
-.back-to-main-menu-button>span {
+.back-to-main-menu-button > span {
     width: 10px;
     height: 10px;
     outline: 5px solid rgba(255, 0, 0, 0.3);
@@ -307,17 +296,13 @@ main>div {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-
-    /* background-color: green; */
 }
 
 .puzzle {
     width: 100%;
     max-width: 350px;
     display: grid;
-
-    /* background-color: blue; */
-    border: 2px solid rgb(48, 45, 116);
+    border: 2px solid var(--puzzle-border-colour, rgb(48, 45, 116));
 }
 
 .cell {
@@ -327,7 +312,7 @@ main>div {
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    color: rgb(48, 45, 116);
+    color: var(--puzzle-border-colour, rgb(48, 45, 116));
     transition: all 200ms ease-in;
 }
 
@@ -338,46 +323,24 @@ main>div {
 
 .cell:focus {
     outline: none;
-    /* background-color: rgb(180, 217, 250); */
     background-color: rgba(180, 217, 250, 0.7);
 }
 
-/* .puzzle>div[data-default-value] {
-    color: #000;
-} */
 [data-default-value] {
-    color: #000;
+    color: var(--text, #000);
 }
-
-/* .puzzle>div:focus {
-    outline: none;
-    background-color: rgb(180, 217, 250)
-} */
 
 /* states of the cells and their inputs (added with Js) */
 .focused-cells-environment {
-    /* background-color: #d5e1ef; */
     background-color: rgba(213, 225, 239, 0.7);
 }
-
-/* .wrong-input {
-    color: rgb(249, 102, 80);
-}
-.other-occurrence-of-wrong-input {
-    background-color: rgba(249, 102, 80, 0.3);
-} */
 
 .cell-is-in-wrong-row,
 .cell-is-in-wrong-column,
 .cell-is-in-wrong-block {
     background-color: rgba(249, 102, 80, 0.3);
 }
-
 /*  */
-
-/* .default-value {
-    background-color: white;
-} */
 
 .easy-level-puzzle {
     grid-template-columns: auto auto auto auto;
@@ -396,11 +359,11 @@ main>div {
 
 /* to add borders around the blocks */
 div.border-right {
-    border-right: 2px solid rgb(48, 45, 116);
+    border-right: 2px solid var(--puzzle-border-colour, rgb(48, 45, 116));
 }
 
 div.border-bottom {
-    border-bottom: 2px solid rgb(48, 45, 116);
+    border-bottom: 2px solid var(--puzzle-border-colour, rgb(48, 45, 116));
 }
 /*  */
 
@@ -426,7 +389,7 @@ div.border-bottom {
     grid-template-columns: auto auto auto auto auto auto auto auto auto;
 }
 
-.puzzle-keyboard>button {
+.puzzle-keyboard > button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
@@ -434,34 +397,30 @@ div.border-bottom {
     transition: all 200ms ease-in;
 }
 
-.puzzle-keyboard>button:focus {
+.puzzle-keyboard > button:focus {
     border: none;
-    outline: 2px solid rgba(112, 94, 70, 1);
+    outline: 2px solid var(--outline-colour, rgba(112, 94, 70, 0.5));
     outline-offset: 1px;
 }
 
-.puzzle-keyboard>button:not(:last-child) {
+.puzzle-keyboard > button:not(:last-child) {
     font-size: 22px;
-    /* background-color: rgba(48, 45, 116, 0.2); */
     background-color: #e0e6ee;
-    color: rgb(107, 112, 212);
-    /* background-color: rgb(1, 1, 52); */
+    color: var(--restart-puzzle-button-bg-colour, rgb(107, 112, 212));
 }
 
-.puzzle-keyboard>button:not(:last-child):hover {
-    /* background-color: rgba(224, 230, 238, 0.7);
-    background-color: #c9ced4; */
+.puzzle-keyboard > button:not(:last-child):hover {
     background-color: #d4dbe2;
 }
 
-.easy-level-puzzle-keyboard>button:not(:last-child),
-.medium-level-puzzle-keyboard>button:not(:last-child) {
+.easy-level-puzzle-keyboard > button:not(:last-child),
+.medium-level-puzzle-keyboard > button:not(:last-child) {
     padding: 7px 12px;
 }
 
 .restart-puzzle-button {
     padding: 10px 0;
-    background-color: rgb(107, 112, 212);
+    background-color: var(--restart-puzzle-button-bg-colour, rgb(107, 112, 212));
     color: #fff;
 }
 
