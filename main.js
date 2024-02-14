@@ -42,7 +42,6 @@ function handleRandomFact() {
         let length = quote.length;
         let index = Math.floor(Math.random() * length);
 
-        console.log(quote[index]);
         display.textContent = quote[index];
     }
     getText("sudoku.json");
@@ -51,71 +50,74 @@ function handleRandomFact() {
 handleRandomFact();
 
 function giveFirstMenuItemFocusByDefault() {
-    // If i give the first menu item focus without using the setTimeout()
-    // function, it affects the transition of the page and I don't know why
+    // I don't know why but if I give the first menu item focus without using the setTimeout()
+    // function, it affects the transition of the page
     setTimeout(() => {
         const firstMenuItem = document.querySelector("[data-menu-item]");
         firstMenuItem.focus();
     }, 500);
 }
 
-function goToMenuPage() {
-    function fromHomePage() {
-        const page = document.querySelector("[data-home-and-menu-page-container]");
-        const newPageCSSProperty = "data-menu-page";
-        const previousPageCSSProperty = "data-home-page";
-        const button = document.querySelector("[data-go-to-menu-page-button]");
+function goToMenuPageFromHomePage() {
+    const page = document.querySelector("[data-home-and-menu-page-container]");
+    const newPageCSSProperty = "data-menu-page";
+    const previousPageCSSProperty = "data-home-page";
+    const button = document.querySelector("[data-go-to-menu-page-button]");
 
-        button.addEventListener("click", () => {
-            page.style.translate = "-100vw";
-            setTabindexTo0(newPageCSSProperty, 0);
-            setTabindexToMinus1(previousPageCSSProperty, 0);
-            
-            giveFirstMenuItemFocusByDefault();
-        });
-    }
-    fromHomePage();
+    button.addEventListener("click", () => {
+        page.style.translate = "-100vw";
+        setTabindexTo0(newPageCSSProperty, 0);
+        setTabindexToMinus1(previousPageCSSProperty, 0);
 
-    function fromMenuItemPage() {
-        const pages = document.querySelectorAll("[data-menu-item-page]");
-        const newPageCSSProperty = "data-menu-page";
-        const previousPageCSSProperty = "data-menu-item-page";
-        const buttons = document.querySelectorAll("[data-back-to-menu-page-button]");
-        const CLASS = "display-menu-item-page-with-js";
+        giveFirstMenuItemFocusByDefault();
+    });
+}
+goToMenuPageFromHomePage();
 
-        function usingMouse() {
-            buttons.forEach((eachButton, index) => {
-                eachButton.addEventListener("click", () => {
-                    pages.item(index).classList.remove(CLASS);
+function goToMenuPageFromMenuItemPageUsingEscapeKey() {
+    const pages = document.querySelectorAll("[data-menu-item-page]");
+    const newPageCSSProperty = "data-menu-page";
+    const previousPageCSSProperty = "data-menu-item-page";
+    const CLASS = "display-menu-item-page-with-js";
+
+    document.addEventListener("keyup", (event) => {
+        if (event.key === "Escape") {
+            pages.forEach((page, index) => {
+                if (page.classList.contains(CLASS)) {
+                    page.classList.remove(CLASS);
                     setTabindexTo0(newPageCSSProperty, 0);
                     setTabindexToMinus1(previousPageCSSProperty, index);
 
                     giveFirstMenuItemFocusByDefault();
-                });
-            });
-        }
-
-        function usingKeyPress() {
-            document.addEventListener("keyup", (event) => {
-                if (event.key === "Escape") {
-                    pages.forEach((page, index) => {
-                        if (page.classList.contains(CLASS)) {
-                            page.classList.remove(CLASS);
-                            setTabindexTo0(newPageCSSProperty, 0);
-                            setTabindexToMinus1(previousPageCSSProperty, index);
-
-                            giveFirstMenuItemFocusByDefault();
-                        }
-                    });
                 }
             });
         }
-        usingMouse();
-        usingKeyPress();
-    }
-    fromMenuItemPage();
+    });
 }
-goToMenuPage();
+goToMenuPageFromMenuItemPageUsingEscapeKey();
+
+function goToMenuPageFromMenuItemPageOnButtonClick(page, index) {
+    const newPageCSSProperty = "data-menu-page";
+    const previousPageCSSProperty = "data-menu-item-page";
+    const CLASS = "display-menu-item-page-with-js";
+
+    page.classList.remove(CLASS);
+    setTabindexTo0(newPageCSSProperty, 0);
+    setTabindexToMinus1(previousPageCSSProperty, index);
+    giveFirstMenuItemFocusByDefault();
+}
+
+function handleMenuItemsBackButtonClick() {
+    const pages = document.querySelectorAll("[data-menu-item-page]");
+    const buttons = document.querySelectorAll("[data-back-to-menu-page-button]");
+
+    buttons.forEach((eachButton, index) => {
+        eachButton.addEventListener("click", () => {
+            goToMenuPageFromMenuItemPageOnButtonClick(pages.item(index), index);
+        });
+    });
+}
+handleMenuItemsBackButtonClick();
 
 function handleArrowRightAndArrowDownKeypressOnMenuItems() {
     const menuItems = document.querySelectorAll("[data-menu-page] button");
@@ -234,7 +236,9 @@ function setupCells(puzzle, totalNoOfCells) {
     function assignColumns() {
         for (let i = 0; i < totalNoOfCells; i++) {
             cells[i].setAttribute(
-                "data-column", ((i + 1) % Math.sqrt(totalNoOfCells) === 0) ? Math.sqrt(totalNoOfCells) : (i + 1) % Math.sqrt(totalNoOfCells)
+                "data-column",
+                ((i + 1) % Math.sqrt(totalNoOfCells) === 0) ? Math.sqrt(totalNoOfCells) :
+                (i + 1) % Math.sqrt(totalNoOfCells)
             );
         }
     }
@@ -364,19 +368,110 @@ function handleArrowKeypressWhenFocusIsOnACell(cells) {
     arrowUpKeypress();
 }
 
+function clearPuzzle(puzzle) {
+    const interactiveCells = puzzle.querySelectorAll("[data-puzzle] > div:not([data-default-value])");
+    const allCells = puzzle.querySelectorAll(".cell");
+
+    interactiveCells.forEach((eachCell) => {
+        eachCell.innerHTML = "";
+    });
+    allCells.forEach((eachCell) => {
+        eachCell.classList.remove("cell-is-in-wrong-row");
+        eachCell.classList.remove("cell-is-in-wrong-column");
+        eachCell.classList.remove("cell-is-in-wrong-block");
+    });
+}
+
+function handleModalWhenPuzzleIsComplete(cells) {
+    const modal = document.querySelector("[data-modal]");
+    const modalsCSSProperty = "data-modal";
+    const puzzlePages = document.querySelectorAll('[data-puzzle-page]');
+    const puzzlePagesCSSProperty = "data-puzzle-page";
+
+    function openModal() {
+        modal.style.display = "block";
+        setTabindexTo0(modalsCSSProperty, 0);
+
+        // the purpose of this block is to get the
+        // index of the page that is an ancestor to the puzzle that was just completed
+        puzzlePages.forEach((page, index) => {
+            const descendantElement = cells.item(0);
+            // It could be any node in the cells nodeList.
+            if (page.contains(descendantElement)) {
+                setTabindexToMinus1(puzzlePagesCSSProperty, index);
+            }
+        });
+    }
+    openModal();
+
+    function closeModal() {
+        modal.style.display = "none";
+        setTabindexToMinus1(modalsCSSProperty, 0);
+
+        // the purpose of this block is to get the
+        // index of the page that is an ancestor to the puzzle that was just completed
+        puzzlePages.forEach((page, index) => {
+            const descendantElement = cells.item(0);
+            // It could be any node in the cells nodeList.
+            if (page.contains(descendantElement)) {
+                setTabindexTo0(puzzlePagesCSSProperty, index);
+            }
+        });
+    }
+
+    function handleBackToMainMenuButton() {
+        const button = document.querySelector("[data-modal-back-button]");
+
+        button.addEventListener("click", () => {
+            closeModal();
+            puzzlePages.forEach((page, index) => {
+                const descendantElement = cells.item(0);
+                if (page.contains(descendantElement)) {
+                    const puzzle = page.querySelector("[data-puzzle]");
+                    clearPuzzle(puzzle);
+                    goToMenuPageFromMenuItemPageOnButtonClick(page, index);
+                }
+            });
+        });
+    }
+    handleBackToMainMenuButton();
+
+    function handleRestartLevelButton() {
+        const button = document.querySelector("[data-modal-restart-button]");
+
+        button.addEventListener("click", () => {
+            closeModal();
+            puzzlePages.forEach((page, index) => {
+                const descendantElement = cells.item(0);
+                if (page.contains(descendantElement)) {
+                    const puzzle = page.querySelector("[data-puzzle]");
+                    clearPuzzle(puzzle);
+                }
+            });
+        });
+    }
+    handleRestartLevelButton();
+}
+
 function checkIfPuzzleIsComplete(nodeList) {
     for (let i = 0; i < nodeList.length; i++) {
         const cell = nodeList[i];
         const cellContent = cell.innerHTML;
 
-        if (cellContent === "" || (cell.classList.contains("cell-is-in-wrong-row") || cell.classList.contains("cell-is-in-wrong-column") || cell.classList.contains("cell-is-in-wrong-block"))) {
-            // Found an empty div
-            console.log(cell);
+        if (
+            cellContent === "" ||
+            (
+                cell.classList.contains("cell-is-in-wrong-row") ||
+                cell.classList.contains("cell-is-in-wrong-column") ||
+                cell.classList.contains("cell-is-in-wrong-block")
+            )
+        ) {
+            // Found an empty cell or a cell with wrong input
             return false;
         }
     }
 
-    // All divs are not empty
+    // Puzzle successfully complete
     return true;
 }
 
@@ -429,25 +524,21 @@ function handleInputsUniqueness(cellOfInput) {
     markWrongInputs(cellsInFocusedElementsColumn, getDuplicateNumbers(textContentOfCellsInFocusedElementsColumn), "cell-is-in-wrong-column");
     markWrongInputs(cellsInFocusedElementsBlock, getDuplicateNumbers(textContentOfCellsInFocusedElementsBlock), "cell-is-in-wrong-block");
 
-    const isNotEmpty = checkIfPuzzleIsComplete(cells);
 
+    const isNotEmpty = checkIfPuzzleIsComplete(cells);
     if (isNotEmpty) {
-        console.log('There are no empty divs.');
-    } else {
-        console.log('There is at least one empty div.');
+        handleModalWhenPuzzleIsComplete(cells);
     }
 }
 
 function handleOutOfRangeInputs(largestPossibleInput, input, selectedCell) {
     if (input === "r") {
         // to enable you press the "r" button.
-        // the "r" button has a purpose that is specified in the clearAllInputtedValues function
+        // the "r" button has a purpose that is specified in the clearAllInputtedValues() function
         return;
     } else if (input > 0 && input <= largestPossibleInput) {
         selectedCell.innerHTML = input;
         handleInputsUniqueness(selectedCell);
-    } else {
-        alert("Input is out of range");
     }
 }
 
@@ -556,6 +647,15 @@ function handleEasyLevelPuzzle() {
     const cells = document.querySelectorAll("[data-easy-level-puzzle] div");
     handleArrowKeypressWhenFocusIsOnACell(cells);
     getInput(numberButtons, puzzle);
+
+    function restartButtonClick() {
+        const button = document.querySelector("[data-restart-easy-puzzle-button]");
+
+        button.addEventListener("click", () => {
+            clearPuzzle(puzzle);
+        });
+    }
+    restartButtonClick();
 }
 handleEasyLevelPuzzle();
 
@@ -642,6 +742,15 @@ function handleMediumLevelPuzzle() {
     const cells = document.querySelectorAll("[data-medium-level-puzzle] div");
     handleArrowKeypressWhenFocusIsOnACell(cells);
     getInput(numberButtons, puzzle);
+
+    function restartButtonClick() {
+        const button = document.querySelector("[data-restart-medium-puzzle-button]");
+
+        button.addEventListener("click", () => {
+            clearPuzzle(puzzle);
+        });
+    }
+    restartButtonClick();
 }
 handleMediumLevelPuzzle();
 
@@ -767,65 +876,47 @@ function handleHardLevelPuzzle() {
     const cells = document.querySelectorAll("[data-hard-level-puzzle] div");
     handleArrowKeypressWhenFocusIsOnACell(cells);
     getInput(numberButtons, puzzle);
+
+    function restartButtonClick() {
+        const button = document.querySelector("[data-restart-hard-puzzle-button]");
+
+        button.addEventListener("click", () => {
+            clearPuzzle(puzzle);
+        });
+    }
+    restartButtonClick();
 }
 handleHardLevelPuzzle();
 
-function clearAllInputtedValues() {
-    const restartButtons = document.querySelectorAll("[data-restart-puzzle-button]");
-    const puzzle = document.querySelectorAll("[data-puzzle]");
+function clearAllInputtedValuesUsingKeyPress() {
+    const pages = document.querySelectorAll("[data-puzzle-page]");
+    const CLASS = "display-menu-item-page-with-js";
     let interactiveCells;
     let allCells;
+    let allCellsArr;
 
-    function usingMouse() {
-        restartButtons.forEach((button, index) => {
-            button.addEventListener("click", () => {
-                interactiveCells = puzzle[index].querySelectorAll("[data-puzzle] > div:not([data-default-value])");
-                allCells = puzzle[index].querySelectorAll("[data-puzzle] > div");
+    document.addEventListener("keyup", (event) => {
+        if (event.key === "r") {
+            pages.forEach((page) => {
+                if (page.classList.contains(CLASS)) {
+                    interactiveCells = page.querySelectorAll("[data-puzzle] > div:not([data-default-value])");
+                    allCells = interactiveCells[0].parentNode.children;
+                    allCellsArr = Array.from(allCells);
 
-                interactiveCells.forEach((eachCell) => {
-                    eachCell.innerHTML = "";
-                });
-                allCells.forEach((eachCell) => {
-                    eachCell.classList.remove("cell-is-in-wrong-row");
-                    eachCell.classList.remove("cell-is-in-wrong-column");
-                    eachCell.classList.remove("cell-is-in-wrong-block");
-                });
+                    interactiveCells.forEach((eachCell) => {
+                        eachCell.innerHTML = "";
+                    });
+                    allCellsArr.forEach((eachCell) => {
+                        eachCell.classList.remove("cell-is-in-wrong-row");
+                        eachCell.classList.remove("cell-is-in-wrong-column");
+                        eachCell.classList.remove("cell-is-in-wrong-block");
+                    });
+                }
             });
-        });
-    }
-
-    function usingKeyPress() {
-        const pages = document.querySelectorAll("[data-puzzle-page]");
-        const CLASS = "display-menu-item-page-with-js";
-        let allCellsArr;
-
-        document.addEventListener("keyup", (event) => {
-            if (event.key === "r") {
-                pages.forEach((page) => {
-                    if (page.classList.contains(CLASS)) {
-                        console.log()
-                        interactiveCells = page.querySelectorAll("[data-puzzle] > div:not([data-default-value])");
-                        allCells = interactiveCells[0].parentNode.children;
-                        allCellsArr = Array.from(allCells);
-
-                        interactiveCells.forEach((eachCell) => {
-                            eachCell.innerHTML = "";
-                        });
-                        allCellsArr.forEach((eachCell) => {
-                            eachCell.classList.remove("cell-is-in-wrong-row");
-                            eachCell.classList.remove("cell-is-in-wrong-column");
-                            eachCell.classList.remove("cell-is-in-wrong-block");
-                        });
-                    }
-                });
-            }
-        });
-    }
-
-    usingMouse();
-    usingKeyPress();
+        }
+    });
 }
-clearAllInputtedValues();
+clearAllInputtedValuesUsingKeyPress();
 
 function addBgColourToFocusedCellAndItsEnvironment() {
     const cells = document.querySelectorAll("[data-puzzle] > div");

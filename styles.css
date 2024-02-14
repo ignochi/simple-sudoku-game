@@ -16,7 +16,7 @@
     --outline-colour: rgba(112, 94, 70, 0.5);
     --puzzle-bg-colour: #f0eefc;
     --puzzle-border-colour: rgb(48, 45, 116);
-    --restart-puzzle-button-bg-colour: var(--restart-puzzle-button-bg-colour, rgb(107, 112, 212));
+    --restart-puzzle-button-bg-colour: rgb(107, 112, 212);
 }
 
 body {
@@ -48,9 +48,6 @@ main > div {
     top: 50%;
     transform: translateY(-50%);
     transition: all 200ms linear;
-    -moz-transition: all 200ms linear;
-    -webkit-transition: all 200ms linear;
-    -o-transition: all 200ms linear;
     display: flex;
     flex-direction: row;
 }
@@ -260,25 +257,23 @@ main > div {
 
 .back-to-main-menu-button {
     width: 100px;
-    border-radius: 8px;
-    transform: skewX(10deg);
     margin-bottom: 20px;
+    border-radius: 8px;
     border: none;
     font-size: 14px;
     padding: 5px 0;
-    transform: skewX(-10deg);
     letter-spacing: 1px;
     background-color: var(--teal-button, teal);
     color: var(--text, #000);
     cursor: pointer;
     user-select: none;
+    transform: skewX(-10deg);
     transition: all 200ms ease-in;
 }
 
 .back-to-main-menu-button:focus {
     border: none;
     border-radius: 6px;
-    /* outline: 2px solid var(--outline-colour, rgba(112, 94, 70, 0.5)); */
     outline: 2px solid rgba(112, 94, 70, 1);
     outline-offset: 1px;
 }
@@ -317,7 +312,6 @@ main > div {
 }
 
 .cell:hover {
-    background-color: #c9ced4;
     background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -492,5 +486,136 @@ div.border-bottom {
 
     .puzzle-keyboard>button:not(:last-child) {
         font-size: 30px;
+    }
+}
+
+/* display modal when puzzle is successfully completed */
+.modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    display: none;
+}
+
+.modal-content {
+    width: 250px;
+    height: auto;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    top: 20%;
+    background-color: #e6e5e5;
+    background-image: url(images/confetti.gif);
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    animation-name: modal-scale-animation;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+}
+
+@keyframes modal-scale-animation {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.modal-text {
+    margin: 0 0 20px;
+}
+
+.modal-text > h1 {
+    color: rgb(2, 2, 72);
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+    margin: 0;
+    font-size: 30px;
+    padding: 0;
+    user-select: none;
+    text-align: center;
+    animation-name: congratulations;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+    width: 0;
+    overflow: hidden;
+}
+
+@keyframes congratulations {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+        overflow: visible;
+    }
+}
+
+.modal-text > div {
+    font-size: 14px;
+    text-align: center;
+}
+
+.modal-back-button,
+.modal-restart-button {
+    font-size: 12px;
+    padding: 4px 7px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--puzzle-border-colour);
+    color: white;
+    transform: skewX(-10deg);
+    transition: all 200ms ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.modal-restart-button {
+    margin-top: 5px;
+}
+
+.modal-back-button:focus,
+.modal-restart-button:focus {
+    border: none;
+    border-radius: 6px;
+    outline: 2px solid rgba(112, 94, 70, 1);
+    outline-offset: 1px;
+}
+
+@media (min-width: 992px) {
+    .modal-content {
+        width: 350px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .modal-text > h1 {
+        font-size: 40px;
+    }
+
+    .modal-back-button,
+    .modal-restart-button {
+        display: inline-block;
+    }
+
+    .modal-restart-button {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
     }
 }
