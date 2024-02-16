@@ -22,6 +22,8 @@
 body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow: hidden;
+    height: 100vh;
+    height: 100svh;
     background-color: var(--carton-colour, #b0916e);
 }
 
