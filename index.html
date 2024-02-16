@@ -48,7 +48,7 @@
                     </li>
                     <li>
                         <button type="button" class="menu-item" data-menu-item tabindex="-1">
-                            About this game
+                            Controls
                         </button>
                     </li>
                     <li>
@@ -82,18 +82,88 @@
         </div>
     </main>
 
-    <section class="how-to-play menu-item-page" data-menu-item-page>
+    <section class="menu-item-page" data-menu-item-page>
         <button class="back-to-main-menu-button wave-animated-button" data-back-to-menu-page-button tabindex="-1">
             Back
             <span></span>
         </button>
+
+        <div class="how-to-play-main-content">
+            <p>
+                Sudoku is a popular, logic-based number puzzle. The name Sudoku is an
+                abbreviation of theJapanese phrase, Sūji wa dokushin ni kagiru (数字は独身に限る),
+                which can be translated as "the digits must be single".
+            </p>
+
+            <p>
+                A standard Sudoku puzzle consists of a 9×9 grid (9 rows and 9 columns) with 3×3 subgrids. There
+                are other variations of the Sudoku puzzle. These include the 4×4 puzzle, the
+                6×6 puzzle, and a host of others.
+            </p>
+
+            <img src="images/a-sample-of-sudoku-puzzle2.png" alt="A 9&#215;9 Sudoku puzzle"
+                class="illustration-image" />
+
+            <p>
+                The standard rule of Sudoku is simple: you are required to fill each cell with a number so that each
+                column,
+                each row, and each of the subgrids that compose the grid (also called "boxes," "blocks," or "regions")
+                contains all of the digits from 1 to n, n being the number of cells in a row. Some cells have been
+                filled
+                by default, you cannot change the values of these cells.
+            </p>
+
+            <img src="images/4x4-sudoku.png" alt="A solved 4&#215;4 Sudoku puzzle" class="illustration-image" />
+
+            <p>
+                Contrary to popular belief, Sudoku is logic-based, and does not require any arithmetic. It is a
+                mind-bending, strategic adventure. Sudoku is the perfect mental workout – it
+                sharpens your focus and enhances problem-solving skills.
+            </p>
+        </div>
     </section>
 
-    <section class="about-this-game menu-item-page" data-menu-item-page>
+    <section class="menu-item-page" data-menu-item-page>
         <button class="back-to-main-menu-button wave-animated-button" data-back-to-menu-page-button tabindex="-1">
             Back
             <span></span>
         </button>
+
+        <div class="controls-main-content">
+
+            <h3>Input values</h3>
+            <p>
+                Each puzzle has a keyboard on the screen. To input a number in a cell:
+            </p>
+            <ol>
+                <li>Click or focus on the cell.</li>
+                <li>Click the keyboard button that has the value of your choice.</li>
+            </ol>
+            <p>
+                If your device uses a keyboard, in addition to the steps above,
+                you can execute the steps listed below:
+            </p>
+            <ol>
+                <li>Click or focus on a cell.</li>
+                <li>Press the number on your device's keyboard that has the value of your choice.</li>
+            </ol>
+
+            <h3>Clear the puzzle</h3>
+            <p>
+                To restart a particular puzzle, click the restart button on your screen. If
+                your device uses a keyboard, press the "r" key on your keyboard.
+            </p>
+
+            <h3>Exit a puzzle</h3>
+            <p>
+                To exit a puzzle, click the 'back' key at the top-left corner of the page.
+                <br />
+                If your device uses a keyboard, pressing the 'Escape' (Esc) key produces the same result.
+                <br />
+                You should know that you don't lose your inputs when you exit a page unless you restart
+                the puzzle or exit the game entirely.
+            </p>
+        </div>
     </section>
 
     <section class="puzzle-page menu-item-page" data-puzzle-page data-menu-item-page>
@@ -110,11 +180,12 @@
                 <button type="button" class="number-button" data-number-button tabindex="-1">2</button>
                 <button type="button" class="number-button" data-number-button tabindex="-1">3</button>
                 <button type="button" class="number-button" data-number-button tabindex="-1">4</button>
-                <button type="button" class="restart-puzzle-button" data-restart-easy-puzzle-button data-restart-puzzle-button tabindex="-1">Restart</button>
+                <button type="button" class="restart-puzzle-button" data-restart-easy-puzzle-button
+                    data-restart-puzzle-button tabindex="-1">Restart</button>
             </section>
         </div>
     </section>
-    
+
     <section class="puzzle-page menu-item-page" data-puzzle-page data-menu-item-page>
         <button class="back-to-main-menu-button wave-animated-button" data-back-to-menu-page-button tabindex="-1">
             Back
@@ -131,7 +202,8 @@
                 <button type="button" class="number-button" data-number-button tabindex="-1">4</button>
                 <button type="button" class="number-button" data-number-button tabindex="-1">5</button>
                 <button type="button" class="number-button" data-number-button tabindex="-1">6</button>
-                <button type="button" class="restart-puzzle-button" data-restart-medium-puzzle-button data-restart-puzzle-button tabindex="-1">Restart</button>
+                <button type="button" class="restart-puzzle-button" data-restart-medium-puzzle-button
+                    data-restart-puzzle-button tabindex="-1">Restart</button>
             </section>
         </div>
     </section>
@@ -155,7 +227,8 @@
                 <button type="button" class="number-button" data-number-button tabindex="-1">7</button>
                 <button type="button" class="number-button" data-number-button tabindex="-1">8</button>
                 <button type="button" class="number-button" data-number-button tabindex="-1">9</button>
-                <button type="button" class="restart-puzzle-button" data-restart-puzzle-button data-restart-hard-puzzle-button tabindex="-1">Restart</button>
+                <button type="button" class="restart-puzzle-button" data-restart-puzzle-button
+                    data-restart-hard-puzzle-button tabindex="-1">Restart</button>
             </section>
         </div>
     </section>
@@ -165,6 +238,108 @@
             Back
             <span></span>
         </button>
+
+        <p>
+            The purpose of this game is to dispel any misconceptions you might have about Sudoku
+            by showing you how easy and fun it is.
+            <br />
+            If you have any questions, complaints, or contributions, feel free to contact us on
+            any of the following platforms.
+        </p>
+
+        <div class="socials-icons">
+            <a href="https://github.com/ignochi" tabindex="-1" target="_blank">
+                <svg height="20" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="20"
+                    data-view-component="true" class="octicon octicon-mark-github">
+                    <path
+                        d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z">
+                    </path>
+                </svg>
+            </a>
+
+            <a href="https://twitter.com/ignochi" tabindex="-1" target="_blank">
+                <svg height="20" width="20" viewBox="0 0 24 24" aria-hidden="true"
+                    class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-lrsllp r-1nao33i r-16y2uox r-8kz0gk">
+                    <g>
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                        </path>
+                    </g>
+                </svg>
+            </a>
+
+            <a href="mailto:preciousozuru130@gmail.com" tabindex="-1" target="_blank">
+                <svg height="20" width="20" viewBox="7.086 -169.483 1277.149 1277.149"
+                    shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                    image-rendering="optimizeQuality" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path fill="none" d="M1138.734 931.095h.283M1139.017 931.095h-.283">
+                        </path>
+                        <path
+                            d="M1179.439 7.087c57.543 0 104.627 47.083 104.627 104.626v30.331l-145.36 103.833-494.873 340.894L148.96 242.419v688.676h-37.247c-57.543 0-104.627-47.082-104.627-104.625V111.742C7.086 54.198 54.17 7.115 111.713 7.115l532.12 394.525L1179.41 7.115l.029-.028z"
+                            fill="#e75a4d"></path>
+                        <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213"
+                            y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)">
+                            <stop offset="0" stop-color="#f8f6ef"></stop>
+                            <stop offset="1" stop-color="#e7e4d6"></stop>
+                        </linearGradient>
+                        <path fill="url(#a)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z">
+                        </path>
+                        <path fill="#e7e4d7" d="M148.96 242.419v688.676h989.774V245.877L643.833 586.771z"></path>
+                        <path fill="#b8b7ae" d="M148.96 931.095l494.873-344.324-2.24-1.586L148.96 923.527z"></path>
+                        <path fill="#b7b6ad" d="M1138.734 245.877l.283 685.218-495.184-344.324z"></path>
+                        <path
+                            d="M1284.066 142.044l.17 684.51c-2.494 76.082-35.461 103.238-145.219 104.514l-.283-685.219 145.36-103.833-.028.028z"
+                            fill="#b2392f"></path>
+                        <linearGradient id="b" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213"
+                            y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)">
+                            <stop offset="0" stop-color="#f8f6ef"></stop>
+                            <stop offset="1" stop-color="#e7e4d6"></stop>
+                        </linearGradient>
+                        <path fill="url(#b)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z"></path>
+                        <linearGradient id="c" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213"
+                            y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)">
+                            <stop offset="0" stop-color="#f8f6ef"></stop>
+                            <stop offset="1" stop-color="#e7e4d6"></stop>
+                        </linearGradient>
+                        <path fill="url(#c)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z"></path>
+                        <linearGradient id="d" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213"
+                            y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)">
+                            <stop offset="0" stop-color="#f8f6ef"></stop>
+                            <stop offset="1" stop-color="#e7e4d6"></stop>
+                        </linearGradient>
+                        <path fill="url(#d)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z"></path>
+                        <linearGradient id="e" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213"
+                            y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)">
+                            <stop offset="0" stop-color="#f8f6ef"></stop>
+                            <stop offset="1" stop-color="#e7e4d6"></stop>
+                        </linearGradient>
+                        <path fill="url(#e)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z"></path>
+                        <linearGradient id="f" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213"
+                            y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)">
+                            <stop offset="0" stop-color="#f8f6ef"></stop>
+                            <stop offset="1" stop-color="#e7e4d6"></stop>
+                        </linearGradient>
+                        <path fill="url(#f)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z"></path>
+                        <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213"
+                            y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)">
+                            <stop offset="0" stop-color="#f8f6ef"></stop>
+                            <stop offset="1" stop-color="#e7e4d6"></stop>
+                        </linearGradient>
+                        <path fill="url(#g)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z"></path>
+                        <linearGradient id="h" gradientUnits="userSpaceOnUse" x1="1959.712" y1="737.107" x2="26066.213"
+                            y2="737.107" gradientTransform="matrix(.0283 0 0 -.0283 248.36 225.244)">
+                            <stop offset="0" stop-color="#f8f6ef"></stop>
+                            <stop offset="1" stop-color="#e7e4d6"></stop>
+                        </linearGradient>
+                        <path fill="url(#h)" d="M111.713 7.087l532.12 394.525L1179.439 7.087z"></path>
+                        <path fill="#f7f5ed" d="M111.713 7.087l532.12 394.525L1179.439 7.087z"></path>
+                    </g>
+                </svg>
+            </a>
+        </div>
     </section>
 
     <!-- modal when puzzle is completed -->

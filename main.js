@@ -205,7 +205,7 @@ function handlePuzzleAspectRatio() {
         const puzzle = document.querySelectorAll("[data-puzzle]");
 
         puzzle.forEach((eachPuzzle) => {
-            eachPuzzle.style.height = `${eachPuzzle.offsetWidth}px`;
+            eachPuzzle.style.minHeight = `${eachPuzzle.offsetWidth}px`;
         });
     }
     resize();

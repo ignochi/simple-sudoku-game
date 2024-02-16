@@ -226,7 +226,7 @@ main > div {
 }
 
 .menu-item-page {
-    background-color: var(--carton-colour, #b0916e);
+    background-color: #d0cfcf;
     position: fixed;
     top: -100%;
     left: 0;
@@ -284,6 +284,63 @@ main > div {
     outline: 5px solid rgba(255, 0, 0, 0.3);
 }
 
+.how-to-play-main-content > p {
+    margin: 0 0 15px;
+    padding: 5px 0;
+    position: relative;
+}
+
+.illustration-image {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 992px) {
+    .illustration-image {
+        width: 400px;
+        height: 300px;
+    }
+}
+
+.controls-main-content > h3 {
+    margin: 5px 0;
+}
+
+.controls-main-content > p {
+    margin: 0;
+}
+
+.controls-main-content > ol {
+    margin: 0;
+    padding: 0 0 0 30px;
+}
+
+.contact-the-contributors > p {
+    margin: 0;
+}
+
+.socials-icons {
+    margin-top: 5px;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .socials-icons {
+        text-align: left;
+    }
+}
+
+.socials-icons > a {
+    text-decoration: none;
+    transition: all 200ms ease-in;
+    display: inline-block;
+    height: 20px;
+}
+
+.socials-icons > a:hover > svg {
+    background-color: rgba(0, 0, 0, 0.1);
+}
 /* the puzzle */
 
 .puzzle-container {
