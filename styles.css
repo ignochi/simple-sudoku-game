@@ -32,6 +32,7 @@ main {
     background-image: url(images/body-mobile-image.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 @media (min-width: 992px) {
