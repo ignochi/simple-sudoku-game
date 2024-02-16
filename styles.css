@@ -67,7 +67,7 @@ main > div {
 
 .game-title > h1 {
     margin: 0;
-    font-family: cursive;
+    font-family: "Protest Revolution", sans-serif;
     font-size: 50px;
     padding: 0;
     user-select: none;
@@ -149,8 +149,8 @@ main > div {
     width: 10px;
     height: 10px;
     position: absolute;
-    top: -0.5px;
-    left: -9.5px;
+    top: 0;
+    left: -9.9px;
     display: inline-block;
     clip-path: polygon(100% 100%, 100% 0%, 0% 0%);
 }
@@ -158,8 +158,9 @@ main > div {
 .random-facts-header {
     margin: 0;
     margin-bottom: 10px;
-    font-family: cursive;
+    font-family: "Protest Riot", sans-serif;
     font-size: 22px;
+    font-weight: 400;
 }
 
 @media (max-height: 320px) {
@@ -202,7 +203,8 @@ main > div {
     font-weight: 600;
     border: none;
     border-radius: 6px;
-    font-family: cursive;
+    font-family: "Protest Riot", sans-serif;
+    font-weight: 100;
     background-color: transparent;
     cursor: pointer;
     user-select: none;
