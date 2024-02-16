@@ -19,6 +19,12 @@
     --restart-puzzle-button-bg-colour: rgb(107, 112, 212);
 }
 
+html {
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+}
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     overflow: hidden;
